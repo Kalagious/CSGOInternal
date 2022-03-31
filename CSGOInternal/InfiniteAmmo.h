@@ -1,0 +1,11 @@
+#pragma once
+#include "Module.h"
+#include "ServerWeapon.h"
+
+class InfiniteAmmo : public Module
+{
+public:
+	InfiniteAmmo(uintptr_t heldWeaponPtrIn);
+	uintptr_t heldWeaponPtr;
+	void tick();
+};
