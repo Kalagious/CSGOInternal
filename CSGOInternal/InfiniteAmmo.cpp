@@ -8,13 +8,18 @@ InfiniteAmmo::InfiniteAmmo(uintptr_t heldWeaponPtrIn)
 	enable = false;
 }
 
-void InfiniteAmmo::tick()
+bool InfiniteAmmo::tick()
 {
 	if (enable)
 	{
 		ServerWeapon* currentWeapon = (ServerWeapon*)*(uintptr_t*)heldWeaponPtr;
-		currentWeapon->currentMag = 69;
-		currentWeapon->reserveAmmo = 420;
+		if (currentWeapon != nullptr)
+		{
+			currentWeapon->currentMag = 69;
+			currentWeapon->reserveAmmo = 420;
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -34,6 +34,12 @@
     <Filter Include="Header Files\Modules">
       <UniqueIdentifier>{280c0d49-f3cf-4377-bc62-8cb5dac258ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Cheats\Classes">
+      <UniqueIdentifier>{4b1ebade-6019-43d8-a0a4-cc31de5ded93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheats\Classes">
+      <UniqueIdentifier>{b9d7d4b2-dd34-4952-8618-dac29a855d71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -111,6 +117,12 @@
     <ClInclude Include="TestingHook.h">
       <Filter>Header Files\Hooks</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Cheats\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EntList.h">
+      <Filter>Header Files\Cheats\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -166,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="TestingHook.cpp">
       <Filter>Source Files\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Cheats\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EntList.cpp">
+      <Filter>Source Files\Cheats\Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

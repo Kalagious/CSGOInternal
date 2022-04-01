@@ -8,8 +8,8 @@
 
 /* 
 TODO:
-	Reverse Client Linked Ent List and parse properly
-	Reverse Server Linked Ent List and parse properly
+	Make the startup reliable so the cheats can be launched anytime 
+	Continue to work on crash resilliency
 	Hook Something fast for cheats->tick()
 	Find Bullet Spread
 	Find Line function for triggerbot and better aimbot

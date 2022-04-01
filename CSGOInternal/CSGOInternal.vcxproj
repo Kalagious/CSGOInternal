@@ -159,7 +159,9 @@
     <ClInclude Include="ClientPlayer.h" />
     <ClInclude Include="ClientState.h" />
     <ClInclude Include="DrawWeaponGUIHook.h" />
+    <ClInclude Include="EntList.h" />
     <ClInclude Include="Fly.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="InfiniteAmmo.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Cheats.h" />
@@ -185,7 +187,9 @@
     <ClCompile Include="CheatsUtil.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DrawWeaponGUIHook.cpp" />
+    <ClCompile Include="EntList.cpp" />
     <ClCompile Include="Fly.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HookManager.cpp" />
     <ClCompile Include="Hooks.cpp" />
     <ClCompile Include="InfiniteAmmo.cpp" />

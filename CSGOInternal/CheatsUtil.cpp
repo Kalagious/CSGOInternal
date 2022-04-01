@@ -2,7 +2,6 @@
 #include "windows.h"
 #include "Offsets.h"
 
-
 Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn)
 {
 	uninject = true;
@@ -17,30 +16,17 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
 	printf("\nServer Player Object found at %#8X\n", serverPlayer);
 
-	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset);
+	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset); 
 	printf("\Client Player Object found at %#8X\n", clientPlayer);
 
-	clientState = (ClientState*)*(uintptr_t*)(EngineDll + ClientStateOffset);
+	clientState = (ClientState*)*(uintptr_t*)(EngineDll + ClientStateOffset); // No recalculation
 	printf("\nClient Player State at %#8X\n", clientState);
 
-
-	serverEntityListAddress = (uintptr_t)(ServerDll + ServerEntityListOffset);
-	printf("\nServer Entity List found at %#8X\n", serverEntityListAddress);
-	loadServerEntList(serverEntityListAddress);
-
-	clientEntityListAddress = (uintptr_t)(ClientDll + ClientEntityListOffset);
+	clientEntityListAddress = (uintptr_t)(ClientDll + ClientEntityListOffset); // No recalculation
 	printf("\Client Entity List found at %#8X\n", clientEntityListAddress);
-	loadClientEntList(clientEntityListAddress);
 
-
-
-
-	hookManager = new HookManager(CSGOExe, ServerDll, ClientDll, EngineDll, serverPlayer);
-	hookManager->setClientViewAnglesHook->initialize();
-	hookManager->setLocalVelHook->initialize();
-	hookManager->setPositionHook->initialize();
-	hookManager->setYawOffsetHook->initialize();
-	//hookManager->testingHook->initialize();
+	gameState = new GameState((BYTE*)ClientDll);
+	entList = new EntList((BYTE*)clientEntityListAddress);
 	
 	infiniteHealth = new InfiniteHealth(serverPlayer);
 	infiniteAmmo = new InfiniteAmmo((uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset));
@@ -50,22 +36,38 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 	fly = new Fly(serverPlayer, clientState);
 
 	uninject = false;
+	firstTick = true;
 }
 
 void Cheats::tick()
 {
+	if (firstTick)
+	{
+		initializeHooks();
+		firstTick = false;
+	}
 
 	keybinds();
-	//cheatStatus();
+	cheatStatus();
 
-	if (serverCheatsEnabled)
+	if (gameState->RoundStateChanged())
+		addressesAreValid = false;
+
+	if (addressesAreValid && gameState->b_IsInGameLast)
 	{
-		infiniteHealth->tick();
-		speed->tick();
-		aimbot->tick();
-		fly->tick();
-		infiniteAmmo->tick();
-	}	
+		if (serverCheatsEnabled)
+		{
+			infiniteHealth->tick();
+			speed->tick();
+			aimbot->tick();
+			fly->tick();
+			if (!infiniteAmmo->tick())
+				addressesAreValid = false;
+		}
+	}
+
+	if (!addressesAreValid && gameState->b_IsInGameLast)
+		recalculateAddresses();
 }
 
 
@@ -88,39 +90,36 @@ void Cheats::cheatStatus()
 	}
 }
 
-
-void Cheats::loadServerEntList(uintptr_t serverEntListAddressIn)
-{
-	uint32_t itr = 0x1C;
-	while (true)
-	{
-		if (*(uint32_t*)(serverEntListAddressIn + itr) == 0x0)
-			break;
-		serverEntList.push_back((ServerPlayer*)*(uint32_t*)(serverEntListAddressIn + itr));
-		itr += 0x18;
-	}
-}
-
-void Cheats::loadClientEntList(uintptr_t clientEntListAddressIn)
-{
-	uint32_t itr = 0x00;
-	while (true)
-	{
-		if (*(uint32_t*)(clientEntListAddressIn + itr) == 0x0)
-			break;
-		clientEntList.push_back((ClientPlayer*)*(uint32_t*)(clientEntListAddressIn + itr));
-		itr += 0x10;
-	}
-}
-
-
 void Cheats::cleanup()
 {
 	hookManager->removeAll();
 }
 
 
-void Cheats::setTickHook()
+void Cheats::initializeHooks()
 {
-	hookManager->drawWeaponGUIHook->initialize();
+	hookManager = new HookManager(CSGOExe, ServerDll, ClientDll, EngineDll, serverPlayer);
+	hookManager->setClientViewAnglesHook->initialize();
+	hookManager->setLocalVelHook->initialize();
+	hookManager->setPositionHook->initialize();
+	hookManager->setYawOffsetHook->initialize();
+	//hookManager->testingHook->initialize();
+	//hookManager->drawWeaponGUIHook->initialize();
+
+}
+
+
+void Cheats::recalculateAddresses()
+{
+	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
+	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset);
+	infiniteAmmo->heldWeaponPtr = (uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset);
+	
+	infiniteHealth->player = serverPlayer;
+	speed->serverPlayer = serverPlayer;
+	aimbot->clientPlayer = clientPlayer;
+	fly->serverPlayer = serverPlayer;
+
+	entList->load();
+	addressesAreValid = true;
 }

@@ -2,6 +2,8 @@
 #include "windows.h"
 #include "HookManager.h"
 #include "AllModules.h"
+#include "GameState.h"
+#include "EntList.h"
 
 
 class Cheats {
@@ -11,15 +13,14 @@ public:
 	void keybinds();
 	void cheatStatus();
 	void cleanup();
-	void setTickHook();
-	void loadServerEntList(uintptr_t serverEntListAddressIn);
-	void loadClientEntList(uintptr_t clientEntListAddressIn);
-
+	void initializeHooks();
+	void recalculateAddresses();
 
 	bool serverCheatsEnabled;
 	bool uninject;
+	bool firstTick;
+	bool addressesAreValid;
 	HookManager* hookManager;
-	uintptr_t serverEntityListAddress;
 	uintptr_t clientEntityListAddress;
 	std::vector<ServerPlayer*> serverEntList;
 	std::vector<ClientPlayer*> clientEntList;
@@ -27,6 +28,8 @@ public:
 	ClientPlayer* clientPlayer;
 	ServerWeapon* heldWeapon;
 	ClientState* clientState;
+	GameState* gameState;
+	EntList* entList;
 	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll;
 	InfiniteHealth* infiniteHealth;
 	NoRecoil* noRecoil;

@@ -21,20 +21,20 @@ void Aimbot::tick()
 		Vector3 pos1 = clientPlayer->v_Position1;
 
 		Vector3 lowestDist(0, -1, 0);
-
-		for (int i = 1; i < clientEntList->size(); i++)
+		
+		for (int i = 0; i < clientEntList->size(); i++)
 		{
-			Vector3 pos2 = clientEntList->at(i)->v_Position1;
-			if (clientEntList->at(i)->i_Health > 0)
+			
+			if (clientEntList->at(i)->i_Health > 0 && clientEntList->at(i) != clientPlayer)
 			{
 				if (lowestDist.y == -1)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - pos2.x), 2) + pow((pos1.y - pos2.y), 2));
+					lowestDist.x = sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2));
 					lowestDist.y = i;
 				}
-				if (sqrt(pow((pos1.x - pos2.x), 2) + pow((pos1.y - pos2.y), 2)) < lowestDist.x)
+				if (sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2)) < lowestDist.x)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - pos2.x), 2) + pow((pos1.y - pos2.y), 2));
+					lowestDist.x = sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2));
 					lowestDist.y = i;
 				}
 			}
@@ -43,10 +43,10 @@ void Aimbot::tick()
 		if (lowestDist.y != -1)
 		{
 			Vector3 pos2 = clientEntList->at(lowestDist.y)->v_Position1;
-
 			float newYaw = atan((pos2.y - pos1.y) / (pos2.x - pos1.x));
 			float newPitch = atan((pos2.z - pos1.z) / lowestDist.x);
 
+			
 			newYaw *= 180 / PI;
 			newPitch *= -180 / PI;
 
