@@ -2,7 +2,7 @@
 #include "Offsets.h"
 
 
-GameState::GameState(BYTE* ClientDllIn)
+GameState::GameState(uintptr_t ClientDllIn)
 {	
 	ClientDll = ClientDllIn;
 	b_IsInGame = (bool*)(ClientDll + b_IsInGameOffset);

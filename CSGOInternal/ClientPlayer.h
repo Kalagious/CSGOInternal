@@ -1,6 +1,5 @@
 #pragma once
 #include "General.h"
-
 // Created with ReClass.NET 1.2 by KN4CK3R
 
 class ICollideable
@@ -20,9 +19,9 @@ static_assert(sizeof(CParticleProperty) == 0x48);
 class IInterpolatedVar
 {
 public:
-	char pad_0000[64]; //0x0000
-}; //Size: 0x0040
-static_assert(sizeof(IInterpolatedVar) == 0x40);
+	char pad_0000[44]; //0x0000
+}; //Size: 0x002C
+static_assert(sizeof(IInterpolatedVar) == 0x2C);
 
 class ClientPlayer
 {
@@ -49,7 +48,14 @@ public:
 	class ICollideable ic_m_CollisionObject; //0x0320
 	class CParticleProperty cpp_m_ParticleProperty; //0x037C
 	class IInterpolatedVar m_iv_vecOrigin; //0x03C4
+	char pad_03F0[20]; //0x03F0
 	class IInterpolatedVar m_iv_angRotation; //0x0404
-	char pad_0444[13584]; //0x0444
-}; //Size: 0x3954
-static_assert(sizeof(ClientPlayer) == 0x3954);
+	char pad_0430[11332]; //0x0430
+	class IInterpolatedVar m_iv_viewPunchAngle; //0x3074
+	class IInterpolatedVar m_iv_aimPunchAngle; //0x30A0
+	class IInterpolatedVar m_iv_aimPunchAngleVel; //0x30CC
+	char pad_30F8[744]; //0x30F8
+	class IInterpolatedVar m_iv_vecViewOffset; //0x33E0
+	char pad_340C[1480]; //0x340C
+}; //Size: 0x39D4
+static_assert(sizeof(ClientPlayer) == 0x39D4);

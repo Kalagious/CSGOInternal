@@ -15,7 +15,7 @@ public:
 class EntList
 {
 public:
-	EntList(BYTE* startAddress);
+	EntList(uintptr_t startAddress);
 	bool load();
 	EntListNode* startNode;
 };

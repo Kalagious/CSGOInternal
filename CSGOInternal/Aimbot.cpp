@@ -9,7 +9,7 @@ Aimbot::Aimbot(ClientPlayer* clientPlayerIn, ClientState* clientStateIn, std::ve
 	clientState = clientStateIn;
 	clientEntList = clientEntListIn;
 	name = "Aimbot";
-	serverModule = true;
+	serverModule = false;
 	enable = false;
 }
 
@@ -25,7 +25,7 @@ void Aimbot::tick()
 		for (int i = 0; i < clientEntList->size(); i++)
 		{
 			
-			if (clientEntList->at(i)->i_Health > 0 && clientEntList->at(i) != clientPlayer)
+			if (clientEntList->at(i)->i_Health > 0 && clientEntList->at(i) != clientPlayer && !clientEntList->at(i)->b_Dormant)
 			{
 				if (lowestDist.y == -1)
 				{
@@ -43,17 +43,20 @@ void Aimbot::tick()
 		if (lowestDist.y != -1)
 		{
 			Vector3 pos2 = clientEntList->at(lowestDist.y)->v_Position1;
+
+			pos2.z += clientEntList->at(lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
+
 			float newYaw = atan((pos2.y - pos1.y) / (pos2.x - pos1.x));
 			float newPitch = atan((pos2.z - pos1.z) / lowestDist.x);
 
 			
-			newYaw *= 180 / PI;
-			newPitch *= -180 / PI;
+			newYaw *= 180.0 / PI;
+			newPitch *= -180.0 / PI;
 
 			if (pos2.x > pos1.x)
-				newYaw = 180 + newYaw;
+				newYaw = 180.0 + newYaw;
 
-			newYaw += 180;
+			newYaw += 180.0;
 			if (!isnan(newYaw))
 				newYawOut = newYaw;
 			if (!isnan(newPitch))

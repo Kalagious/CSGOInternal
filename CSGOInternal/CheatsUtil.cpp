@@ -25,8 +25,8 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 	clientEntityListAddress = (uintptr_t)(ClientDll + ClientEntityListOffset); // No recalculation
 	printf("\Client Entity List found at %#8X\n", clientEntityListAddress);
 
-	gameState = new GameState((BYTE*)ClientDll);
-	entList = new EntList((BYTE*)clientEntityListAddress);
+	gameState = new GameState(ClientDll);
+	entList = new EntList(clientEntityListAddress);
 	
 	infiniteHealth = new InfiniteHealth(serverPlayer);
 	infiniteAmmo = new InfiniteAmmo((uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset));
@@ -48,7 +48,7 @@ void Cheats::tick()
 	}
 
 	keybinds();
-	cheatStatus();
+	//cheatStatus();
 
 	if (gameState->RoundStateChanged())
 		addressesAreValid = false;
@@ -113,6 +113,9 @@ void Cheats::recalculateAddresses()
 {
 	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
 	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset);
+	C_CSPlayerPtr = *(uintptr_t*)clientPlayer;
+
+
 	infiniteAmmo->heldWeaponPtr = (uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset);
 	
 	infiniteHealth->player = serverPlayer;

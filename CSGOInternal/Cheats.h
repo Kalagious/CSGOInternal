@@ -24,6 +24,7 @@ public:
 	uintptr_t clientEntityListAddress;
 	std::vector<ServerPlayer*> serverEntList;
 	std::vector<ClientPlayer*> clientEntList;
+	uintptr_t C_CSPlayerPtr;
 	ServerPlayer* serverPlayer;
 	ClientPlayer* clientPlayer;
 	ServerWeapon* heldWeapon;

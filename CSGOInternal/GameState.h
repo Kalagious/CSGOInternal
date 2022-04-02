@@ -4,9 +4,9 @@
 class GameState
 {
 public:
-	GameState(BYTE* ClientDllIn);
+	GameState(uintptr_t ClientDllIn);
 	bool RoundStateChanged();
-	BYTE* ClientDll;
+	uintptr_t ClientDll;
 	bool b_IsInGameLast;
 	bool* b_IsInGame;
 };
