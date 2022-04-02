@@ -17,3 +17,4 @@ const uint32_t ClientPlayerOffset = 0xDB65DC; // client.dll
 
 const uint32_t HeldWeaponListOffset = 0x54; 
 const uint32_t b_IsInGameOffset = 0x5224D24; // client.dll
+const uint32_t InputBitfieldsOffset = 0x79A635FC; // inputsystem.dll

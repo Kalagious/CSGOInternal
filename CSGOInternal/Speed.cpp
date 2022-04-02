@@ -9,7 +9,15 @@ Speed::Speed(ServerPlayer* serverPlayerIn, ClientState* clientStateIn)
 
 	name = "Speed";
 	serverModule = true;
-	speedMult = 800;
+	speedMult = 600;
+	enable = false;
+}
+
+Speed::Speed()
+{
+	name = "Speed";
+	serverModule = true;
+	speedMult = 600;
 	enable = false;
 }
 

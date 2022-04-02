@@ -6,6 +6,7 @@ class Speed : public Module
 {
 public:
 	Speed(ServerPlayer* serverPlayerIn, ClientState* clientStateIn);
+	Speed();
 	ServerPlayer* serverPlayer;
 	ClientState* clientState;
 	void tick();

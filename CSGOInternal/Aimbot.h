@@ -6,6 +6,7 @@ class Aimbot : public Module
 {
 public:
 	Aimbot(ClientPlayer* clientPlayerIn, ClientState* clientStateIn, std::vector<ClientPlayer*>* clientEntListIn);
+	Aimbot();
 	ClientState* clientState;
 	ClientPlayer* clientPlayer;
 	std::vector<ClientPlayer*>* clientEntList;

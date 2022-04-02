@@ -8,6 +8,15 @@ InfiniteAmmo::InfiniteAmmo(uintptr_t heldWeaponPtrIn)
 	enable = false;
 }
 
+InfiniteAmmo::InfiniteAmmo()
+{
+	name = "Infinite Ammo";
+	serverModule = true;
+	enable = false;
+}
+
+
+
 bool InfiniteAmmo::tick()
 {
 	if (enable)

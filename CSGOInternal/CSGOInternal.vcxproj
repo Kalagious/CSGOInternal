@@ -156,6 +156,7 @@
     <ClInclude Include="Aimbot.h" />
     <ClInclude Include="AllClasses.h" />
     <ClInclude Include="AllModules.h" />
+    <ClInclude Include="BHop.h" />
     <ClInclude Include="ClientPlayer.h" />
     <ClInclude Include="ClientState.h" />
     <ClInclude Include="DrawWeaponGUIHook.h" />
@@ -183,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aimbot.cpp" />
+    <ClCompile Include="BHop.cpp" />
     <ClCompile Include="CheatsKeybinds.cpp" />
     <ClCompile Include="CheatsUtil.cpp" />
     <ClCompile Include="dllmain.cpp" />

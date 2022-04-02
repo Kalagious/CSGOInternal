@@ -123,6 +123,9 @@
     <ClInclude Include="EntList.h">
       <Filter>Header Files\Cheats\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="BHop.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="EntList.cpp">
       <Filter>Source Files\Cheats\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="BHop.cpp">
+      <Filter>Source Files\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #include "windows.h"
 #include "Offsets.h"
 
-Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn)
+Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, uintptr_t InputSystemDllIn)
 {
 	uninject = true;
 
@@ -12,6 +12,7 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 	ServerDll = ServerDllIn;
 	ClientDll = ClientDllIn;
 	EngineDll = EngineDllIn;
+	InputSystemDll = InputSystemDllIn;
 
 	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
 	printf("\nServer Player Object found at %#8X\n", serverPlayer);
@@ -28,19 +29,32 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 	gameState = new GameState(ClientDll);
 	entList = new EntList(clientEntityListAddress);
 	
-	infiniteHealth = new InfiniteHealth(serverPlayer);
-	infiniteAmmo = new InfiniteAmmo((uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset));
-	noRecoil = new NoRecoil();
-	speed = new Speed(serverPlayer, clientState);
-	aimbot = new Aimbot(clientPlayer, clientState, &clientEntList);
-	fly = new Fly(serverPlayer, clientState);
 
+	infiniteHealth = new InfiniteHealth();
+
+	infiniteAmmo = new InfiniteAmmo();
+
+	noRecoil = new NoRecoil();
+
+	speed = new Speed();
+
+	aimbot = new Aimbot();
+	aimbot->clientEntList = &clientEntList;
+
+	fly = new Fly();
+	
 	uninject = false;
 	firstTick = true;
+	addressesAreValid = false;
 }
 
 void Cheats::tick()
 {
+	
+	if (GetAsyncKeyState(VK_NUMPAD6) & 0x01)
+		*(uintptr_t*)(InputSystemDll+0x43624) = 2;
+
+
 	if (firstTick)
 	{
 		initializeHooks();
@@ -59,7 +73,7 @@ void Cheats::tick()
 		{
 			infiniteHealth->tick();
 			speed->tick();
-			aimbot->tick();
+			//aimbot->tick();
 			fly->tick();
 			if (!infiniteAmmo->tick())
 				addressesAreValid = false;
@@ -118,10 +132,46 @@ void Cheats::recalculateAddresses()
 
 	infiniteAmmo->heldWeaponPtr = (uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset);
 	
-	infiniteHealth->player = serverPlayer;
-	speed->serverPlayer = serverPlayer;
-	aimbot->clientPlayer = clientPlayer;
-	fly->serverPlayer = serverPlayer;
+	if (clientPlayer)
+	{
+		aimbot->clientPlayer = clientPlayer;
+	}
+	else
+	{
+		addressesAreValid = false;
+		return;
+	}
+
+	if (clientState)
+	{
+		fly->clientState = clientState;
+		aimbot->clientState = clientState;
+		speed->clientState = clientState;
+	}
+	else
+	{
+		addressesAreValid = false;
+		return;
+	}
+
+	if (serverPlayer)
+	{
+		infiniteHealth->player = serverPlayer;
+		speed->serverPlayer = serverPlayer;
+		fly->serverPlayer = serverPlayer;
+		if (serverPlayer->weaponListPtr)
+		{
+			infiniteAmmo->heldWeaponPtr = (uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset);
+
+		}
+	}
+	else
+	{
+		addressesAreValid = false;
+		return;
+	}
+
+
 
 	entList->load();
 	addressesAreValid = true;

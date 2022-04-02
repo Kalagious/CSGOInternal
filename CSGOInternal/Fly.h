@@ -6,6 +6,7 @@ class Fly : public Module
 {
 public:
 	Fly(ServerPlayer* serverPlayerIn, ClientState* clientStateIn);
+	Fly();
 	ServerPlayer* serverPlayer;
 	ClientState* clientState;
 	void tick();

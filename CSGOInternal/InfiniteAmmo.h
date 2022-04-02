@@ -6,6 +6,7 @@ class InfiniteAmmo : public Module
 {
 public:
 	InfiniteAmmo(uintptr_t heldWeaponPtrIn);
+	InfiniteAmmo();
 	uintptr_t heldWeaponPtr;
 	bool tick();
 };

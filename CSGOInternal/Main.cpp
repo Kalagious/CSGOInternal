@@ -36,8 +36,9 @@ void mainCode(HMODULE hModule)
 	uintptr_t clientDll = (uintptr_t)GetModuleHandle(L"client.dll");
 	uintptr_t serverDll = (uintptr_t)GetModuleHandle(L"server.dll");
 	uintptr_t engineDll = (uintptr_t)GetModuleHandle(L"engine.dll");
+	uintptr_t InputSystemDll = (uintptr_t)GetModuleHandle(L"inputsystem.dll");
 
-	Cheats cheats(csgoExe, serverDll, clientDll, engineDll);
+	Cheats cheats(csgoExe, serverDll, clientDll, engineDll, InputSystemDll);
 	cheatsGlobal = &cheats;
 
 	//cheats.setTickHook();

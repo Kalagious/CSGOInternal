@@ -1,5 +1,3 @@
-#pragma once
-#include "General.h"
 // Created with ReClass.NET 1.2 by KN4CK3R
 
 class ICollideable
@@ -34,11 +32,12 @@ public:
 	Vector3 v_Velocity1; //0x0094
 	Vector3 v_Position1; //0x00A0
 	Vector3 v_Position2; //0x00AC
-	char pad_00B8[69]; //0x00B8
-	bool b_Dormant; //0x00FD
-	char pad_00FE[2]; //0x00FE
+	char pad_00B8[53]; //0x00B8
+	bool b_Dormant; //0x00ED
+	char pad_00EE[18]; //0x00EE
 	int32_t i_Health; //0x0100
-	char pad_0104[12]; //0x0104
+	bool b_IsOnGround; //0x0104
+	char pad_0105[11]; //0x0105
 	float f_PlayerHeight; //0x0110
 	Vector3 v_Velocity2; //0x0114
 	char pad_0120[12]; //0x0120

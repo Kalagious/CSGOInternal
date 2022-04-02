@@ -13,6 +13,14 @@ Aimbot::Aimbot(ClientPlayer* clientPlayerIn, ClientState* clientStateIn, std::ve
 	enable = false;
 }
 
+Aimbot::Aimbot()
+{
+	name = "Aimbot";
+	serverModule = false;
+	enable = false;
+}
+
+
 void Aimbot::tick()
 {
 	if (enable)
@@ -59,8 +67,19 @@ void Aimbot::tick()
 			newYaw += 180.0;
 			if (!isnan(newYaw))
 				newYawOut = newYaw;
+			else
+				newYawOut = 720;
+
 			if (!isnan(newPitch))
 				newPitchOut = newPitch;
+			else
+				newPitchOut = 720;
+
+		}
+		else
+		{
+			newYawOut = 720;
+			newPitchOut = 720;
 		}
 	}
 }

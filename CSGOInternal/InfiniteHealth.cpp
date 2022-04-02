@@ -8,6 +8,13 @@ InfiniteHealth::InfiniteHealth(ServerPlayer* playerIn)
 	enable = false;
 }
 
+InfiniteHealth::InfiniteHealth()
+{
+	name = "Infinite Health";
+	serverModule = true;
+	enable = false;
+}
+
 void InfiniteHealth::tick()
 {
 	if (enable)

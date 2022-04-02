@@ -8,7 +8,7 @@
 
 class Cheats {
 public:
-	Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn);
+	Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, uintptr_t InputSystemDllIn);
 	void tick();
 	void keybinds();
 	void cheatStatus();
@@ -31,7 +31,7 @@ public:
 	ClientState* clientState;
 	GameState* gameState;
 	EntList* entList;
-	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll;
+	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll, InputSystemDll;
 	InfiniteHealth* infiniteHealth;
 	NoRecoil* noRecoil;
 	InfiniteAmmo* infiniteAmmo;

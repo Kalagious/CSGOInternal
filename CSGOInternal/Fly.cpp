@@ -14,6 +14,16 @@ Fly::Fly(ServerPlayer* serverPlayerIn, ClientState* clientStateIn)
 	enable = false;
 }
 
+Fly::Fly()
+{
+	name = "Fly";
+	serverModule = true;
+	flyMult = 10;
+	vertMult = 8;
+	enable = false;
+}
+
+
 void Fly::tick()
 {
 	if (enable)
