@@ -5,4 +5,5 @@ class NoRecoil : public Module
 {
 public:
 	NoRecoil();
+	bool tick() { return false; }
 };

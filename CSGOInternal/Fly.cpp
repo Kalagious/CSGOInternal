@@ -1,18 +1,8 @@
 #include "Fly.h"
 
-// Server-side speed
+// Server-side fly
 // !!!HOOK!!! Uses the set vel hook for player objects
-Fly::Fly(ServerPlayer* serverPlayerIn, ClientState* clientStateIn)
-{
-	serverPlayer = serverPlayerIn;
-	clientState = clientStateIn;
 
-	name = "Fly";
-	serverModule = true;
-	flyMult = 10;
-	vertMult = 8;
-	enable = false;
-}
 
 Fly::Fly()
 {
@@ -24,10 +14,12 @@ Fly::Fly()
 }
 
 
-void Fly::tick()
+bool Fly::tick()
 {
 	if (enable)
 	{
+		if (!clientState)
+			return false;
 		bool move = false;
 		float yaw = clientState->yaw;
 		if (GetAsyncKeyState(0x57))
@@ -91,4 +83,5 @@ void Fly::tick()
 			yPos = 0;
 		}
 	}
+	return true;
 }

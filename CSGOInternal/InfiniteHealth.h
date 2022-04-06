@@ -5,8 +5,7 @@
 class InfiniteHealth : public Module
 {
 public:
-	InfiniteHealth(ServerPlayer* playerIn);
 	InfiniteHealth();
-	ServerPlayer* player;
-	void tick();
+	ServerPlayer* serverPlayer;
+	bool tick();
 };

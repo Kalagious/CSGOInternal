@@ -5,3 +5,5 @@
 #include "Fly.h"
 #include "InfiniteAmmo.h"
 #include "NoRecoil.h"
+#include "Radar.h"
+#include "BHop.h"

@@ -2,29 +2,22 @@
 
 // Server-side speed
 // !!!HOOK!!! Uses the set vel hook for player objects
-Speed::Speed(ServerPlayer* serverPlayerIn, ClientState* clientStateIn)
-{
-	serverPlayer = serverPlayerIn;
-	clientState = clientStateIn;
-
-	name = "Speed";
-	serverModule = true;
-	speedMult = 600;
-	enable = false;
-}
 
 Speed::Speed()
 {
 	name = "Speed";
 	serverModule = true;
-	speedMult = 600;
+	speedMult = 800;
 	enable = false;
 }
 
-void Speed::tick()
+bool Speed::tick()
 {
 	if (enable)
 	{
+		if (!clientState || !serverPlayer)
+			return false;
+
 		bool move = false;
 		float yaw = clientState->yaw;
 		if (GetAsyncKeyState(0x57))
@@ -77,4 +70,5 @@ void Speed::tick()
 			yVel = 0;
 		}
 	}
+	return true;
 }

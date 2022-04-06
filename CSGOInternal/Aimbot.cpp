@@ -1,48 +1,39 @@
 #include "Aimbot.h"
 
-// Server-side aimbot relies on server entity list
 // !!!HOOK!!!! Uses a hook on the client view angle function
 
-Aimbot::Aimbot(ClientPlayer* clientPlayerIn, ClientState* clientStateIn, std::vector<ClientPlayer*>* clientEntListIn)
+Aimbot::Aimbot(std::vector<ClientPlayer*>* entList)
 {
-	clientPlayer = clientPlayerIn;
-	clientState = clientStateIn;
-	clientEntList = clientEntListIn;
-	name = "Aimbot";
-	serverModule = false;
-	enable = false;
-}
-
-Aimbot::Aimbot()
-{
+	this->entList = entList;
 	name = "Aimbot";
 	serverModule = false;
 	enable = false;
 }
 
 
-void Aimbot::tick()
+bool Aimbot::tick()
 {
 	if (enable)
 	{
-		// REPLACE ALL PLAYER REFERENCES, LOCAL PLAYER IS NOT INCLUDED IN CLIENT ENT LIST
+		if (!clientPlayer || !entList)
+			return false;
 		Vector3 pos1 = clientPlayer->v_Position1;
 
 		Vector3 lowestDist(0, -1, 0);
 		
-		for (int i = 0; i < clientEntList->size(); i++)
+		for (int i = 0; i < entList->size(); i++)
 		{
 			
-			if (clientEntList->at(i)->i_Health > 0 && clientEntList->at(i) != clientPlayer && !clientEntList->at(i)->b_Dormant)
+			if (entList->at(i)->i_Health > 0 && entList->at(i) != clientPlayer && !entList->at(i)->b_Dormant)
 			{
 				if (lowestDist.y == -1)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2));
+					lowestDist.x = sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
 					lowestDist.y = i;
 				}
-				if (sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2)) < lowestDist.x)
+				if (sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2)) < lowestDist.x)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - clientEntList->at(i)->v_Position1.x), 2) + pow((pos1.y - clientEntList->at(i)->v_Position1.y), 2));
+					lowestDist.x = sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
 					lowestDist.y = i;
 				}
 			}
@@ -50,9 +41,9 @@ void Aimbot::tick()
 
 		if (lowestDist.y != -1)
 		{
-			Vector3 pos2 = clientEntList->at(lowestDist.y)->v_Position1;
+			Vector3 pos2 = entList->at(lowestDist.y)->v_Position1;
 
-			pos2.z += clientEntList->at(lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
+			pos2.z += entList->at(lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
 
 			float newYaw = atan((pos2.y - pos1.y) / (pos2.x - pos1.x));
 			float newPitch = atan((pos2.z - pos1.z) / lowestDist.x);
@@ -82,4 +73,5 @@ void Aimbot::tick()
 			newPitchOut = 720;
 		}
 	}
+	return true;
 }

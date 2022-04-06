@@ -5,12 +5,11 @@
 class Aimbot : public Module
 {
 public:
-	Aimbot(ClientPlayer* clientPlayerIn, ClientState* clientStateIn, std::vector<ClientPlayer*>* clientEntListIn);
-	Aimbot();
+	Aimbot(std::vector<ClientPlayer*>* entList);
 	ClientState* clientState;
 	ClientPlayer* clientPlayer;
-	std::vector<ClientPlayer*>* clientEntList;
-	void tick();
+	std::vector<ClientPlayer*>* entList;
+	bool tick();
 	float aimbotStrength, newYawOut, newPitchOut;
 };
 

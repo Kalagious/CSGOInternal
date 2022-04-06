@@ -8,7 +8,7 @@
 
 class Cheats {
 public:
-	Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, uintptr_t InputSystemDllIn);
+	Cheats();
 	void tick();
 	void keybinds();
 	void cheatStatus();
@@ -31,11 +31,14 @@ public:
 	ClientState* clientState;
 	GameState* gameState;
 	EntList* entList;
-	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll, InputSystemDll;
+	uintptr_t csgoExe, serverDll, clientDll, engineDll, inputSystemDll;
+
+	std::vector<Module*> modules;
 	InfiniteHealth* infiniteHealth;
 	NoRecoil* noRecoil;
 	InfiniteAmmo* infiniteAmmo;
 	Speed* speed;
 	Aimbot* aimbot;
 	Fly* fly;
+	Radar* radar;
 };

@@ -1,12 +1,5 @@
 #include "InfiniteHealth.h"
 
-InfiniteHealth::InfiniteHealth(ServerPlayer* playerIn)
-{
-	player = playerIn;
-	name = "Infinite Health";
-	serverModule = true;
-	enable = false;
-}
 
 InfiniteHealth::InfiniteHealth()
 {
@@ -15,8 +8,13 @@ InfiniteHealth::InfiniteHealth()
 	enable = false;
 }
 
-void InfiniteHealth::tick()
+bool InfiniteHealth::tick()
 {
 	if (enable)
-		player->health = 1337;
+	{
+		if (!serverPlayer)
+			return false;
+		serverPlayer->health = 1337;
+	}
+		
 }

@@ -1,3 +1,5 @@
+#pragma once
+#include "General.h"
 // Created with ReClass.NET 1.2 by KN4CK3R
 
 class ICollideable
@@ -49,7 +51,9 @@ public:
 	class IInterpolatedVar m_iv_vecOrigin; //0x03C4
 	char pad_03F0[20]; //0x03F0
 	class IInterpolatedVar m_iv_angRotation; //0x0404
-	char pad_0430[11332]; //0x0430
+	char pad_0430[1360]; //0x0430
+	bool b_IsSpotted; //0x0980
+	char pad_0981[9971]; //0x0981
 	class IInterpolatedVar m_iv_viewPunchAngle; //0x3074
 	class IInterpolatedVar m_iv_aimPunchAngle; //0x30A0
 	class IInterpolatedVar m_iv_aimPunchAngleVel; //0x30CC

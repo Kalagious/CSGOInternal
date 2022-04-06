@@ -7,7 +7,7 @@ BHop::BHop()
 	enable = false;
 }
 
-void BHop::tick()
+bool BHop::tick()
 {
 	if (enable)
 	{
@@ -15,4 +15,5 @@ void BHop::tick()
 
 
 	}
+	return true;
 }

@@ -5,10 +5,9 @@
 class Fly : public Module
 {
 public:
-	Fly(ServerPlayer* serverPlayerIn, ClientState* clientStateIn);
 	Fly();
 	ServerPlayer* serverPlayer;
 	ClientState* clientState;
-	void tick();
+	bool tick();
 	float flyMult, vertMult, xPos, yPos, zPos;
 };

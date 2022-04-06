@@ -6,16 +6,6 @@
 #include "AllClasses.h"
 #include "HookManager.h"
 
-/* 
-TODO:
-	Make the startup reliable so the cheats can be launched anytime 
-	Continue to work on crash resilliency
-	Hook Something fast for cheats->tick()
-	Find Bullet Spread
-	Find Line function for triggerbot and better aimbot
-	Hook Graphics Function for ESP
-*/ 
-
 
 
 const float PI = 3.14159265358979F;
@@ -32,13 +22,9 @@ void mainCode(HMODULE hModule)
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
 	printf("Starting!\n");
 
-	uintptr_t csgoExe = (uintptr_t)GetModuleHandle(L"csgo.exe");
-	uintptr_t clientDll = (uintptr_t)GetModuleHandle(L"client.dll");
-	uintptr_t serverDll = (uintptr_t)GetModuleHandle(L"server.dll");
-	uintptr_t engineDll = (uintptr_t)GetModuleHandle(L"engine.dll");
-	uintptr_t InputSystemDll = (uintptr_t)GetModuleHandle(L"inputsystem.dll");
 
-	Cheats cheats(csgoExe, serverDll, clientDll, engineDll, InputSystemDll);
+
+	Cheats cheats;
 	cheatsGlobal = &cheats;
 
 	//cheats.setTickHook();
@@ -52,7 +38,8 @@ void mainCode(HMODULE hModule)
 
 	cheats.cleanup();
 
-	fclose(console);
+	if (console)
+		fclose(console);
 	FreeConsole();
 	FreeLibraryAndExitThread(hModule, 0);
 }

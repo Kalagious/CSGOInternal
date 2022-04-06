@@ -2,47 +2,47 @@
 #include "windows.h"
 #include "Offsets.h"
 
-Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, uintptr_t InputSystemDllIn)
+#define gModule(x) (uintptr_t)GetModuleHandle(x)
+
+
+Cheats::Cheats()
 {
 	uninject = true;
-
 	serverCheatsEnabled = true;
 
-	CSGOExe = CSGOExeIn;
-	ServerDll = ServerDllIn;
-	ClientDll = ClientDllIn;
-	EngineDll = EngineDllIn;
-	InputSystemDll = InputSystemDllIn;
+	C_CSPlayerPtr = NULL;
+	heldWeapon = NULL;
+	hookManager = NULL;
 
-	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
-	printf("\nServer Player Object found at %#8X\n", serverPlayer);
+	csgoExe = gModule(L"csgo.exe");
+	clientDll = gModule(L"client.dll");
+	serverDll = gModule(L"server.dll");
+	engineDll = gModule(L"engine.dll");
+	inputSystemDll = gModule(L"inputsystem.dll");
 
-	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset); 
-	printf("\Client Player Object found at %#8X\n", clientPlayer);
+	serverPlayer = (ServerPlayer*)*(uintptr_t*)(serverDll + ServerPlayerOffset);
+	printf("Server Player Object found at %#8X\n", (uintptr_t)serverPlayer);
 
-	clientState = (ClientState*)*(uintptr_t*)(EngineDll + ClientStateOffset); // No recalculation
-	printf("\nClient Player State at %#8X\n", clientState);
+	clientPlayer = (ClientPlayer*)*(uintptr_t*)(clientDll + ClientPlayerOffset); 
+	printf("Client Player Object found at %#8X\n", (uintptr_t)clientPlayer);
 
-	clientEntityListAddress = (uintptr_t)(ClientDll + ClientEntityListOffset); // No recalculation
-	printf("\Client Entity List found at %#8X\n", clientEntityListAddress);
+	clientState = (ClientState*)*(uintptr_t*)(engineDll + ClientStateOffset); // No recalculation
+	printf("Client Player State at %#8X\n", (uintptr_t)clientState);
 
-	gameState = new GameState(ClientDll);
+	clientEntityListAddress = (uintptr_t)(clientDll + ClientEntityListOffset); // No recalculation
+	printf("Client Entity List found at %#8X\n", clientEntityListAddress);
+
+	gameState = new GameState(clientDll);
 	entList = new EntList(clientEntityListAddress);
-	
 
 	infiniteHealth = new InfiniteHealth();
-
 	infiniteAmmo = new InfiniteAmmo();
-
 	noRecoil = new NoRecoil();
-
 	speed = new Speed();
-
-	aimbot = new Aimbot();
-	aimbot->clientEntList = &clientEntList;
-
+	radar = new Radar(&clientEntList);
+	aimbot = new Aimbot(&clientEntList);
 	fly = new Fly();
-	
+
 	uninject = false;
 	firstTick = true;
 	addressesAreValid = false;
@@ -50,11 +50,6 @@ Cheats::Cheats(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn
 
 void Cheats::tick()
 {
-	
-	if (GetAsyncKeyState(VK_NUMPAD6) & 0x01)
-		*(uintptr_t*)(InputSystemDll+0x43624) = 2;
-
-
 	if (firstTick)
 	{
 		initializeHooks();
@@ -73,7 +68,7 @@ void Cheats::tick()
 		{
 			infiniteHealth->tick();
 			speed->tick();
-			//aimbot->tick();
+			radar->tick();
 			fly->tick();
 			if (!infiniteAmmo->tick())
 				addressesAreValid = false;
@@ -91,17 +86,19 @@ void Cheats::cheatStatus()
 	if (serverCheatsEnabled)
 	{
 		printf("Server Cheats:\n");
-		printf(" %15s: %s                     \n", infiniteHealth->name.c_str(), (infiniteHealth->enable) ? "Enabled" : "Disabled");
-		printf(" %15s: %s                     \n", infiniteAmmo->name.c_str(), (infiniteAmmo->enable) ? "Enabled" : "Disabled");
-		printf(" %15s: %s                     \n", noRecoil->name.c_str(), (noRecoil->enable) ? "Enabled" : "Disabled");
-		printf(" %15s: %s                     \n", speed->name.c_str(), (speed->enable) ? "Enabled" : "Disabled");
-		printf(" %15s: %s                     \n", aimbot->name.c_str(), (aimbot->enable) ? "Enabled" : "Disabled");
-		printf(" %15s: %s                     \n", fly->name.c_str(), (fly->enable) ? "Enabled" : "Disabled");
+		infiniteHealth->status();
+		infiniteAmmo->status();
+		noRecoil->status();
+		speed->status();
+		fly->status();
 	}
 	else
 	{ 
 		printf("<Server Disabled>\n");
 	}
+	printf("\nClient Cheats:\n");
+	radar->status();
+	aimbot->status();
 }
 
 void Cheats::cleanup()
@@ -112,7 +109,7 @@ void Cheats::cleanup()
 
 void Cheats::initializeHooks()
 {
-	hookManager = new HookManager(CSGOExe, ServerDll, ClientDll, EngineDll, serverPlayer);
+	hookManager = new HookManager(csgoExe, serverDll, clientDll, engineDll, serverPlayer);
 	hookManager->setClientViewAnglesHook->initialize();
 	hookManager->setLocalVelHook->initialize();
 	hookManager->setPositionHook->initialize();
@@ -125,8 +122,8 @@ void Cheats::initializeHooks()
 
 void Cheats::recalculateAddresses()
 {
-	serverPlayer = (ServerPlayer*)*(uintptr_t*)(ServerDll + ServerPlayerOffset);
-	clientPlayer = (ClientPlayer*)*(uintptr_t*)(ClientDll + ClientPlayerOffset);
+	serverPlayer = (ServerPlayer*)*(uintptr_t*)(serverDll + ServerPlayerOffset);
+	clientPlayer = (ClientPlayer*)*(uintptr_t*)(clientDll + ClientPlayerOffset);
 	C_CSPlayerPtr = *(uintptr_t*)clientPlayer;
 
 
@@ -156,7 +153,7 @@ void Cheats::recalculateAddresses()
 
 	if (serverPlayer)
 	{
-		infiniteHealth->player = serverPlayer;
+		infiniteHealth->serverPlayer = serverPlayer;
 		speed->serverPlayer = serverPlayer;
 		fly->serverPlayer = serverPlayer;
 		if (serverPlayer->weaponListPtr)
@@ -170,8 +167,6 @@ void Cheats::recalculateAddresses()
 		addressesAreValid = false;
 		return;
 	}
-
-
 
 	entList->load();
 	addressesAreValid = true;
