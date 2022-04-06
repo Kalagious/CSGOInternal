@@ -1,7 +1,7 @@
 #include "General.h"
 
 
-int main()
+uint32_t main()
 {
 	printf("Test");
 }

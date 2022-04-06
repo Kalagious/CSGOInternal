@@ -30,7 +30,7 @@ DrawWeaponGUIHook::DrawWeaponGUIHook(uintptr_t moduleBaseIn)
 
 bool DrawWeaponGUIHook::initialize()
 {
-	printf("Hooking %s function at %#8x\n", hookName.c_str(), DrawWeaponGUIHook::oFunction);
+	printf("Hooking %s function at %#8x\n", hookName.c_str(), (uintptr_t)DrawWeaponGUIHook::oFunction);
 	DrawWeaponGUIHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)DrawWeaponGUIHook::oFunction, (uintptr_t)DrawWeaponGUIHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

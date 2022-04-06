@@ -30,7 +30,7 @@ DWORD GetProcId(const wchar_t* procName)
     return procId;
 }
 
-int main()
+uint32_t main()
 {
     const char* dllPath = "C:\\Users\\Jordan\\source\\repos\\CSGOInternal\\Debug\\CSGOInternal.dll";
 
@@ -52,7 +52,7 @@ int main()
         if (!loc) {
             throw std::exception("VALLOC failed");
         }
-        printf("Memory allocated at %#8X\n", loc);
+        printf("Memory allocated at %#8X\n",(uintptr_t) loc);
 
         WriteProcessMemory(hProc, loc, dllPath, strlen(dllPath) + 1, 0);
         printf("DLL Path Written");

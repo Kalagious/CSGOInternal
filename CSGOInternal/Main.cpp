@@ -21,9 +21,7 @@ void mainCode(HMODULE hModule)
 	info.bVisible = false;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
 	printf("Starting!\n");
-
-
-
+	
 	Cheats cheats;
 	cheatsGlobal = &cheats;
 

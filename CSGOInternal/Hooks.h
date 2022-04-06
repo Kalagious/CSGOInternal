@@ -8,7 +8,7 @@
 #include "AllClasses.h"
 #include "HookOffsets.h"
 
-
+#pragma warning(disable:26495)
 class Hook
 {
 public:
@@ -24,4 +24,4 @@ public:
 	uintptr_t trampoline32(uintptr_t src, uintptr_t dst, uint32_t len);
 	bool remove();
 };
-
+#pragma warning(default:26495)

@@ -2,7 +2,7 @@
 
 uintptr_t getOffset(RecvTable* table, std::string tableName, std::string netVarName)
 {
-	for (int i = 0; i < table->m_nProps; i++)
+	for (uint32_t i = 0; i < table->m_nProps; i++)
 	{
 		RecvProp prop = table->m_pProps[i];
 

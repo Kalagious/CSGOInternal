@@ -8,7 +8,7 @@ class RecvTable
 {
 public:
 	RecvProp* m_pProps;
-	int	m_nProps;
+	uint32_t	m_nProps;
 	void* m_pDecoder;
 	const char* m_pNetTableName;
 	bool m_bInitialized;
@@ -20,8 +20,8 @@ class RecvProp
 public:
 	const char* m_pVarName;
 	void* m_RecvType;
-	int	m_Flags;
-	int	m_StringBufferSize;
+	uint32_t	m_Flags;
+	uint32_t	m_StringBufferSize;
 	bool m_bInsideArray;
 	const void* m_pExtraData;
 	RecvProp* m_pArrayProp;
@@ -29,9 +29,9 @@ public:
 	void* m_ProxyFn;
 	void* m_DataTableProxyFn;
 	RecvTable* m_pDataTable;
-	int	m_Offset;
-	int	m_ElementStride;
-	int	m_nElements;
+	uint32_t	m_Offset;
+	uint32_t	m_ElementStride;
+	uint32_t	m_nElements;
 	const char* m_pParentArrayPropName;
 };
 
@@ -45,6 +45,6 @@ public:
 	char* m_pNetworkName;
 	RecvTable* m_pRecvTable;
 	ClientClass* m_pNext;
-	int	m_ClassID;
+	uint32_t	m_ClassID;
 	const char* m_pMapClassname;
 };

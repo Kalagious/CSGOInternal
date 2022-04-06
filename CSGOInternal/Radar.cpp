@@ -12,7 +12,7 @@ bool Radar::tick()
 {
 	if (enable)
 	{
-		for (int i = 0; i < entList->size(); i++)
+		for (uint32_t i = 0; i < entList->size(); i++)
 		{
 			if (!entList->at(i)->b_Dormant)
 				entList->at(i)->b_IsSpotted = true;

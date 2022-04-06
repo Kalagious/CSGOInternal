@@ -22,7 +22,7 @@ bool EntList::load()
 		if (nodeItr->entity && *(uintptr_t*)(nodeItr->entity) == cheatsGlobal->C_CSPlayerPtr)
 		{
 			cheatsGlobal->clientEntList.push_back(nodeItr->entity);
-			printf("%#8X - %#8X\n", nodeItr-> entity, *(nodeItr->entity));
+			printf("%#8X\n", (uintptr_t)nodeItr->entity);
 		}
 		nodeItr = nodeItr->nextNode;
 	}

@@ -21,7 +21,7 @@ bool Aimbot::tick()
 
 		Vector3 lowestDist(0, -1, 0);
 		
-		for (int i = 0; i < entList->size(); i++)
+		for (uint32_t i = 0; i < entList->size(); i++)
 		{
 			
 			if (entList->at(i)->i_Health > 0 && entList->at(i) != clientPlayer && !entList->at(i)->b_Dormant)
