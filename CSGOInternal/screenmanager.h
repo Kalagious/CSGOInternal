@@ -28,7 +28,9 @@ public:
 	windowDimensions gameDimensions;
 
 	// Draw Functions
-	void FilledRect(int x, int y, int w, int h, D3DCOLOR color);
+	void FilledRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, D3DCOLOR color);
+	void Line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t h, D3DCOLOR color);
+	void Text(uint32_t x, uint32_t y, uint32_t w, uint32_t h, std::string text, D3DCOLOR color);
 };
 
 

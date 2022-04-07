@@ -108,7 +108,7 @@
       <Filter>ScreenManager</Filter>
     </ClInclude>
     <ClInclude Include="endscenehook.h">
-      <Filter>Hooks</Filter>
+      <Filter>ScreenManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,14 +174,14 @@
     <ClCompile Include="screenmanager_drawfunctions.cpp">
       <Filter>ScreenManager</Filter>
     </ClCompile>
-    <ClCompile Include="endscenehook.cpp">
-      <Filter>Hooks</Filter>
-    </ClCompile>
     <ClCompile Include="gamestate.cpp">
       <Filter>Cheats\Classes</Filter>
     </ClCompile>
     <ClCompile Include="entlist.cpp">
       <Filter>Cheats\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="endscenehook.cpp">
+      <Filter>ScreenManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
