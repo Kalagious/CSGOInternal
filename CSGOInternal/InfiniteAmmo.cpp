@@ -23,5 +23,5 @@ bool InfiniteAmmo::tick()
 		}
 		return false;
 	}
-
+	return true;
 }

@@ -1,201 +1,187 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Cheats">
-      <UniqueIdentifier>{d1bda1cc-1399-4439-a5c9-29ab0cb949ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Hooks">
-      <UniqueIdentifier>{0e548d27-0cf0-4c90-811c-eeca7cc86615}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Hooks">
+    <Filter Include="Hooks">
       <UniqueIdentifier>{bf9ea857-ed6d-4744-809b-c58b7c261fab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Cheats">
-      <UniqueIdentifier>{9cdc4661-40fc-4037-bc44-5d83f3a5e04f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameClasses">
-      <UniqueIdentifier>{ba832bc3-c3fa-4df5-8fe6-fdadad361053}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Modules">
-      <UniqueIdentifier>{a0a46ddf-7fd4-4d0f-8194-33b288d3bc6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Modules">
+    <Filter Include="Modules">
       <UniqueIdentifier>{280c0d49-f3cf-4377-bc62-8cb5dac258ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Cheats\Classes">
+    <Filter Include="GameClasses">
+      <UniqueIdentifier>{ba832bc3-c3fa-4df5-8fe6-fdadad361053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cheats">
+      <UniqueIdentifier>{9cdc4661-40fc-4037-bc44-5d83f3a5e04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cheats\Classes">
       <UniqueIdentifier>{4b1ebade-6019-43d8-a0a4-cc31de5ded93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Cheats\Classes">
-      <UniqueIdentifier>{b9d7d4b2-dd34-4952-8618-dac29a855d71}</UniqueIdentifier>
+    <Filter Include="ScreenManager">
+      <UniqueIdentifier>{b41bf969-21a7-437c-b09d-277634b61f3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="General.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="hooks.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="Hooks.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="setpositionhook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="SetPositionHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="cheats.h">
+      <Filter>Cheats</Filter>
     </ClInclude>
-    <ClInclude Include="Cheats.h">
-      <Filter>Header Files\Cheats</Filter>
+    <ClInclude Include="module.h">
+      <Filter>Cheats</Filter>
     </ClInclude>
-    <ClInclude Include="Module.h">
-      <Filter>Header Files\Cheats</Filter>
+    <ClInclude Include="hookoffsets.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="HookOffsets.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="allclasses.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="AllClasses.h">
-      <Filter>Header Files\GameClasses</Filter>
+    <ClInclude Include="setlocalvelhook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="SetLocalVelHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="hookmanager.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="HookManager.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="infinitehealth.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="InfiniteHealth.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="speed.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Speed.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="serverplayer.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="ServerPlayer.h">
-      <Filter>Header Files\GameClasses</Filter>
+    <ClInclude Include="clientstate.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Offsets.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="aimbot.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ClientState.h">
-      <Filter>Header Files\GameClasses</Filter>
+    <ClInclude Include="allmodules.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Aimbot.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="setclientviewangleshook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="AllModules.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="fly.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="SetClientViewAnglesHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="infiniteammo.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Fly.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="serverweapon.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="InfiniteAmmo.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="norecoil.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ServerWeapon.h">
-      <Filter>Header Files\GameClasses</Filter>
+    <ClInclude Include="setyawoffsethook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="NoRecoil.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="drawweaponguihook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="SetYawOffsetHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="clientplayer.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="DrawWeaponGUIHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="testinghook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="ClientPlayer.h">
-      <Filter>Header Files\GameClasses</Filter>
+    <ClInclude Include="gamestate.h">
+      <Filter>Cheats\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="TestingHook.h">
-      <Filter>Header Files\Hooks</Filter>
+    <ClInclude Include="entlist.h">
+      <Filter>Cheats\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\Cheats\Classes</Filter>
+    <ClInclude Include="bhop.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="EntList.h">
-      <Filter>Header Files\Cheats\Classes</Filter>
+    <ClInclude Include="radar.h">
+      <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="BHop.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="general.h" />
+    <ClInclude Include="offsets.h" />
+    <ClInclude Include="screenmanager.h">
+      <Filter>ScreenManager</Filter>
     </ClInclude>
-    <ClInclude Include="Radar.h">
-      <Filter>Header Files\Modules</Filter>
+    <ClInclude Include="endscenehook.h">
+      <Filter>Hooks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="drawweaponguihook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="hookmanager.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="CheatsKeybinds.cpp">
-      <Filter>Source Files\Cheats</Filter>
+    <ClCompile Include="hooks.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="CheatsUtil.cpp">
-      <Filter>Source Files\Cheats</Filter>
+    <ClCompile Include="setclientviewangleshook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="Hooks.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="setlocalvelhook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="SetPositionHook.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="setpositionhook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="SetLocalVelHook.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="setyawoffsethook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="HookManager.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="testinghook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="InfiniteHealth.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="aimbot.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Speed.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="bhop.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Aimbot.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="fly.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="SetClientViewAngles.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="infiniteammo.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Fly.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="infinitehealth.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="InfiniteAmmo.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="norecoil.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="NoRecoil.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="radar.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="SetYawOffsetHook.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="speed.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="DrawWeaponGUIHook.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="cheatskeybinds.cpp">
+      <Filter>Cheats</Filter>
     </ClCompile>
-    <ClCompile Include="TestingHook.cpp">
-      <Filter>Source Files\Hooks</Filter>
+    <ClCompile Include="cheatsutil.cpp">
+      <Filter>Cheats</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\Cheats\Classes</Filter>
+    <ClCompile Include="screenmanager.cpp">
+      <Filter>ScreenManager</Filter>
     </ClCompile>
-    <ClCompile Include="EntList.cpp">
-      <Filter>Source Files\Cheats\Classes</Filter>
+    <ClCompile Include="screenmanager_drawfunctions.cpp">
+      <Filter>ScreenManager</Filter>
     </ClCompile>
-    <ClCompile Include="BHop.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="endscenehook.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="Radar.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="gamestate.cpp">
+      <Filter>Cheats\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="entlist.cpp">
+      <Filter>Cheats\Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

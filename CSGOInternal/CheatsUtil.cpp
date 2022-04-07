@@ -1,4 +1,4 @@
-#include "Cheats.h"
+#include "cheats.h"
 #include "windows.h"
 #include "Offsets.h"
 
@@ -31,7 +31,8 @@ Cheats::Cheats()
 
 	clientEntityListAddress = (uintptr_t)(clientDll + ClientEntityListOffset); // No recalculation
 	printf("Client Entity List found at %#8X\n", clientEntityListAddress);
-
+	
+	screenManager = new ScreenManager();
 	gameState = new GameState(clientDll);
 	entList = new EntList(clientEntityListAddress);
 
@@ -104,6 +105,7 @@ void Cheats::cheatStatus()
 void Cheats::cleanup()
 {
 	hookManager->removeAll();
+	screenManager->endSceneHook->remove();
 }
 
 
@@ -114,6 +116,11 @@ void Cheats::initializeHooks()
 	hookManager->setLocalVelHook->initialize();
 	hookManager->setPositionHook->initialize();
 	hookManager->setYawOffsetHook->initialize();
+	if (!screenManager->Initialize())
+	{
+		printf("[*] Error Hooking D3D!\n");
+		uninject = true;
+	}
 	//hookManager->testingHook->initialize();
 	//hookManager->drawWeaponGUIHook->initialize();
 
@@ -159,7 +166,6 @@ void Cheats::recalculateAddresses()
 		if (serverPlayer->weaponListPtr)
 		{
 			infiniteAmmo->heldWeaponPtr = (uintptr_t)((uintptr_t)serverPlayer->weaponListPtr + HeldWeaponListOffset);
-
 		}
 	}
 	else

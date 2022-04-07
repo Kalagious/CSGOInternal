@@ -72,9 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -153,59 +157,64 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Aimbot.h" />
-    <ClInclude Include="AllClasses.h" />
-    <ClInclude Include="AllModules.h" />
-    <ClInclude Include="BHop.h" />
-    <ClInclude Include="ClientPlayer.h" />
-    <ClInclude Include="ClientState.h" />
-    <ClInclude Include="DrawWeaponGUIHook.h" />
-    <ClInclude Include="EntList.h" />
-    <ClInclude Include="Fly.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="InfiniteAmmo.h" />
-    <ClInclude Include="Module.h" />
-    <ClInclude Include="Cheats.h" />
-    <ClInclude Include="General.h" />
-    <ClInclude Include="HookManager.h" />
-    <ClInclude Include="HookOffsets.h" />
-    <ClInclude Include="Hooks.h" />
-    <ClInclude Include="InfiniteHealth.h" />
-    <ClInclude Include="NoRecoil.h" />
-    <ClInclude Include="Offsets.h" />
-    <ClInclude Include="Radar.h" />
-    <ClInclude Include="ServerWeapon.h" />
-    <ClInclude Include="SetClientViewAnglesHook.h" />
-    <ClInclude Include="SetLocalVelHook.h" />
-    <ClInclude Include="SetPositionHook.h" />
-    <ClInclude Include="ServerPlayer.h" />
-    <ClInclude Include="SetYawOffsetHook.h" />
-    <ClInclude Include="Speed.h" />
-    <ClInclude Include="TestingHook.h" />
+    <ClInclude Include="aimbot.h" />
+    <ClInclude Include="allclasses.h" />
+    <ClInclude Include="allmodules.h" />
+    <ClInclude Include="bhop.h" />
+    <ClInclude Include="clientplayer.h" />
+    <ClInclude Include="clientstate.h" />
+    <ClInclude Include="drawweaponguihook.h" />
+    <ClInclude Include="endscenehook.h" />
+    <ClInclude Include="entlist.h" />
+    <ClInclude Include="fly.h" />
+    <ClInclude Include="gamestate.h" />
+    <ClInclude Include="infiniteammo.h" />
+    <ClInclude Include="module.h" />
+    <ClInclude Include="cheats.h" />
+    <ClInclude Include="general.h" />
+    <ClInclude Include="hookmanager.h" />
+    <ClInclude Include="hookoffsets.h" />
+    <ClInclude Include="hooks.h" />
+    <ClInclude Include="infinitehealth.h" />
+    <ClInclude Include="norecoil.h" />
+    <ClInclude Include="offsets.h" />
+    <ClInclude Include="radar.h" />
+    <ClInclude Include="screenmanager.h" />
+    <ClInclude Include="serverweapon.h" />
+    <ClInclude Include="setclientviewangleshook.h" />
+    <ClInclude Include="setlocalvelhook.h" />
+    <ClInclude Include="setpositionhook.h" />
+    <ClInclude Include="serverplayer.h" />
+    <ClInclude Include="setyawoffsethook.h" />
+    <ClInclude Include="speed.h" />
+    <ClInclude Include="testinghook.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aimbot.cpp" />
-    <ClCompile Include="BHop.cpp" />
-    <ClCompile Include="CheatsKeybinds.cpp" />
-    <ClCompile Include="CheatsUtil.cpp" />
+    <ClCompile Include="aimbot.cpp" />
+    <ClCompile Include="bhop.cpp" />
+    <ClCompile Include="cheatskeybinds.cpp" />
+    <ClCompile Include="cheatsutil.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="DrawWeaponGUIHook.cpp" />
-    <ClCompile Include="EntList.cpp" />
-    <ClCompile Include="Fly.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="HookManager.cpp" />
-    <ClCompile Include="Hooks.cpp" />
-    <ClCompile Include="InfiniteAmmo.cpp" />
-    <ClCompile Include="InfiniteHealth.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="NoRecoil.cpp" />
-    <ClCompile Include="Radar.cpp" />
-    <ClCompile Include="SetClientViewAngles.cpp" />
-    <ClCompile Include="SetLocalVelHook.cpp" />
-    <ClCompile Include="SetPositionHook.cpp" />
-    <ClCompile Include="SetYawOffsetHook.cpp" />
-    <ClCompile Include="Speed.cpp" />
-    <ClCompile Include="TestingHook.cpp" />
+    <ClCompile Include="drawweaponguihook.cpp" />
+    <ClCompile Include="endscenehook.cpp" />
+    <ClCompile Include="entlist.cpp" />
+    <ClCompile Include="fly.cpp" />
+    <ClCompile Include="gamestate.cpp" />
+    <ClCompile Include="hookmanager.cpp" />
+    <ClCompile Include="hooks.cpp" />
+    <ClCompile Include="infiniteammo.cpp" />
+    <ClCompile Include="infinitehealth.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="norecoil.cpp" />
+    <ClCompile Include="radar.cpp" />
+    <ClCompile Include="screenmanager.cpp" />
+    <ClCompile Include="screenmanager_drawfunctions.cpp" />
+    <ClCompile Include="setclientviewangleshook.cpp" />
+    <ClCompile Include="setlocalvelhook.cpp" />
+    <ClCompile Include="setpositionhook.cpp" />
+    <ClCompile Include="setyawoffsethook.cpp" />
+    <ClCompile Include="speed.cpp" />
+    <ClCompile Include="testinghook.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

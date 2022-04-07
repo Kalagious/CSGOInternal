@@ -28,32 +28,32 @@ bool Aimbot::tick()
 			{
 				if (lowestDist.y == -1)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
-					lowestDist.y = i;
+					lowestDist.x = (float)sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
+					lowestDist.y = (float)i;
 				}
 				if (sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2)) < lowestDist.x)
 				{
-					lowestDist.x = sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
-					lowestDist.y = i;
+					lowestDist.x = (float)sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
+					lowestDist.y = (float)i;
 				}
 			}
 		}
 
 		if (lowestDist.y != -1)
 		{
-			Vector3 pos2 = entList->at(lowestDist.y)->v_Position1;
+			Vector3 pos2 = entList->at((uint32_t)lowestDist.y)->v_Position1;
 
-			pos2.z += entList->at(lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
+			pos2.z += entList->at((uint32_t)lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
 
 			float newYaw = atan((pos2.y - pos1.y) / (pos2.x - pos1.x));
 			float newPitch = atan((pos2.z - pos1.z) / lowestDist.x);
 
 			
-			newYaw *= 180.0 / PI;
-			newPitch *= -180.0 / PI;
+			newYaw *= (float)(180.0 / PI);
+			newPitch *= (float)(- 180.0 / PI);
 
 			if (pos2.x > pos1.x)
-				newYaw = 180.0 + newYaw;
+				newYaw = (float)(180.0 + newYaw);
 
 			newYaw += 180.0;
 			if (!isnan(newYaw))

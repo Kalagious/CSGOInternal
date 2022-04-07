@@ -1,7 +1,16 @@
 #pragma once
-#include "windows.h"
-#include <stdint.h>
 #include <vector>
+#include <windows.h>
+#include <tlHelp32.h>
+#include <stdint.h>
+#include <tchar.h>
+#include <iostream>
+#pragma warning(disable: 26495)
+#include <d3d9.h>
+#include <d3dx9.h>
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dx9.lib")
+#pragma warning(default: 26495)
 
 
 void mainCode(HMODULE hModule);

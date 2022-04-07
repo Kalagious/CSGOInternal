@@ -1,4 +1,4 @@
-#include "EntList.h"
+#include "entlist.h"
 #include "Cheats.h"
 
 

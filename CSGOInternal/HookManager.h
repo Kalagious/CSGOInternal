@@ -5,13 +5,14 @@
 #include <tlHelp32.h>
 #include <stdint.h>
 #include <tchar.h>
-#include "AllClasses.h"
-#include "SetLocalVelHook.h"
-#include "SetPositionHook.h"
-#include "SetClientViewAnglesHook.h"
-#include "SetYawOffsetHook.h"
-#include "DrawWeaponGUIHook.h"
-#include "TestingHook.h"
+#include "allclasses.h"
+#include "setlocalvelhook.h"
+#include "setpositionhook.h"
+#include "setclientviewangleshook.h"
+#include "setyawoffsethook.h"
+#include "drawweaponguihook.h"
+#include "testinghook.h"
+#include "endscenehook.h"
 
 class HookManager
 {

@@ -1,9 +1,10 @@
 #pragma once
 #include "windows.h"
 #include "HookManager.h"
-#include "AllModules.h"
-#include "GameState.h"
-#include "EntList.h"
+#include "allmodules.h"
+#include "gamestate.h"
+#include "entlist.h"
+#include "screenmanager.h"
 
 
 class Cheats {
@@ -21,6 +22,7 @@ public:
 	bool firstTick;
 	bool addressesAreValid;
 	HookManager* hookManager;
+	ScreenManager* screenManager;
 	uintptr_t clientEntityListAddress;
 	std::vector<ServerPlayer*> serverEntList;
 	std::vector<ClientPlayer*> clientEntList;

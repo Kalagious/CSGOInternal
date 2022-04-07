@@ -16,5 +16,5 @@ bool InfiniteHealth::tick()
 			return false;
 		serverPlayer->health = 1337;
 	}
-		
+	return true;
 }

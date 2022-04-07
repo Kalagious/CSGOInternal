@@ -1,12 +1,10 @@
 #include "windows.h"
-#include "Cheats.h"
-#include "General.h"
+#include "cheats.h"
+#include "general.h"
 #include <tlhelp32.h>
 #include <iostream>
-#include "AllClasses.h"
-#include "HookManager.h"
-
-
+#include "allclasses.h"
+#include "hookmanager.h"
 
 const float PI = 3.14159265358979F;
 Cheats* cheatsGlobal;

@@ -1,4 +1,4 @@
-#include "HookManager.h"
+#include "hookmanager.h"
 
 
 
@@ -34,7 +34,4 @@ void HookManager::removeAll()
 
 	if (drawWeaponGUIHook->enabled)
 		drawWeaponGUIHook->remove();
-
-	if (testingHook->enabled)
-		testingHook->remove();
 }
