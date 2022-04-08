@@ -29,3 +29,13 @@ bool EntList::load()
 	return true;
 }
 
+bool IsValidEnt(ClientPlayer* player)
+{
+	if (!player)
+		return false;
+	if (player->b_Dormant)
+		return false;
+	if (player->i_Health < 0)
+		return false;
+	return true;
+}

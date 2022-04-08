@@ -9,9 +9,12 @@ void APIENTRY EndSceneHook::hookFunction(LPDIRECT3DDEVICE9 device)
 {
 	if (!ScreenManager::d3dDevice)
 		ScreenManager::d3dDevice = device;
-	cheatsGlobal->screenManager->FilledRect(cheatsGlobal->screenManager->gameDimensions.cx, cheatsGlobal->screenManager->gameDimensions.cy, 300, 300, D3DCOLOR_ARGB(0, 0, 255, 255));
-	std::string tmp = "Hello World!";
-	//cheatsGlobal->screenManager->WriteText(10, 10, 500, 500, tmp, D3DCOLOR_ARGB(0, 0, 255, 255));
+
+	if (!cheatsGlobal->screenManager->imGUIIsInitialized && ScreenManager::d3dDevice)
+		cheatsGlobal->screenManager->InitializeImGUI();
+
+	if (cheatsGlobal->screenManager->imGUIIsInitialized)
+		cheatsGlobal->screenManager->DrawImGUI();
 
 	oFunction(device);
 }

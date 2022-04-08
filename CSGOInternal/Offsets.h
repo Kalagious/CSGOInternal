@@ -14,6 +14,7 @@ const uint32_t PlayerMemberFunctionDescOffset2 = 0xA8D344; // server.dll
 const uint32_t ClientStateOffset = 0x58CFC4; // engine.dll
 const uint32_t ServerPlayerOffset = 0xA8E28C; // server.dll
 const uint32_t ClientPlayerOffset = 0xDB65DC; // client.dll
+const uint32_t ViewMatrixOffset = 0x4DC3C80; // client.dll
 
 const uint32_t HeldWeaponListOffset = 0x54; 
 const uint32_t b_IsInGameOffset = 0x5224D24; // client.dll

@@ -19,3 +19,5 @@ public:
 	bool load();
 	EntListNode* startNode;
 };
+
+bool IsValidEnt(ClientPlayer* player);

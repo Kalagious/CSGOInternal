@@ -27,6 +27,7 @@ public:
 	std::vector<ServerPlayer*> serverEntList;
 	std::vector<ClientPlayer*> clientEntList;
 	uintptr_t C_CSPlayerPtr;
+	float viewMatrix[16];
 	ServerPlayer* serverPlayer;
 	ClientPlayer* clientPlayer;
 	ServerWeapon* heldWeapon;
@@ -43,4 +44,6 @@ public:
 	Aimbot* aimbot;
 	Fly* fly;
 	Radar* radar;
+	BHop* bhop;
+	ESP* esp;
 };

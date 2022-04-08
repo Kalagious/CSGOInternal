@@ -1,4 +1,5 @@
 #include "Aimbot.h"
+#include "entlist.h"
 
 // !!!HOOK!!!! Uses a hook on the client view angle function
 
@@ -24,7 +25,7 @@ bool Aimbot::tick()
 		for (uint32_t i = 0; i < entList->size(); i++)
 		{
 			
-			if (entList->at(i)->i_Health > 0 && entList->at(i) != clientPlayer && !entList->at(i)->b_Dormant)
+			if (entList->at(i) != clientPlayer && IsValidEnt(entList->at(i)))
 			{
 				if (lowestDist.y == -1)
 				{

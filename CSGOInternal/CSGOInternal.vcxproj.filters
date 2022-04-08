@@ -19,6 +19,9 @@
     <Filter Include="ScreenManager">
       <UniqueIdentifier>{b41bf969-21a7-437c-b09d-277634b61f3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ScreenManager\ImGUI">
+      <UniqueIdentifier>{06a69ab2-8498-4f52-bfa9-0665ee7b070d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hooks.h">
@@ -110,6 +113,33 @@
     <ClInclude Include="endscenehook.h">
       <Filter>ScreenManager</Filter>
     </ClInclude>
+    <ClInclude Include="esp.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imconfig.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui_impl_dx9.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui_impl_win32.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui_internal.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_rectpack.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_textedit.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_truetype.h">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drawweaponguihook.cpp">
@@ -182,6 +212,30 @@
     </ClCompile>
     <ClCompile Include="endscenehook.cpp">
       <Filter>ScreenManager</Filter>
+    </ClCompile>
+    <ClCompile Include="esp.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_demo.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_draw.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_impl_dx9.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_impl_win32.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_tables.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_widgets.cpp">
+      <Filter>ScreenManager\ImGUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

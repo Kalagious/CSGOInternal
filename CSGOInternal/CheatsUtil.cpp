@@ -20,12 +20,6 @@ Cheats::Cheats()
 	engineDll = gModule(L"engine.dll");
 	inputSystemDll = gModule(L"inputsystem.dll");
 
-	serverPlayer = (ServerPlayer*)*(uintptr_t*)(serverDll + ServerPlayerOffset);
-	printf("Server Player Object found at %#8X\n", (uintptr_t)serverPlayer);
-
-	clientPlayer = (ClientPlayer*)*(uintptr_t*)(clientDll + ClientPlayerOffset); 
-	printf("Client Player Object found at %#8X\n", (uintptr_t)clientPlayer);
-
 	clientState = (ClientState*)*(uintptr_t*)(engineDll + ClientStateOffset); // No recalculation
 	printf("Client Player State at %#8X\n", (uintptr_t)clientState);
 
@@ -35,6 +29,7 @@ Cheats::Cheats()
 	screenManager = new ScreenManager();
 	gameState = new GameState(clientDll);
 	entList = new EntList(clientEntityListAddress);
+	//viewMatrix = (float*)(clientDll + ViewMatrixOffset);
 
 	infiniteHealth = new InfiniteHealth();
 	infiniteAmmo = new InfiniteAmmo();
@@ -42,7 +37,10 @@ Cheats::Cheats()
 	speed = new Speed();
 	radar = new Radar(&clientEntList);
 	aimbot = new Aimbot(&clientEntList);
+	esp = new ESP(&clientEntList);
 	fly = new Fly();
+	bhop = new BHop();
+
 
 	uninject = false;
 	firstTick = true;
@@ -64,7 +62,8 @@ void Cheats::tick()
 		addressesAreValid = false;
 
 	if (addressesAreValid && gameState->b_IsInGameLast)
-	{
+	{	
+		bhop->tick();
 		if (serverCheatsEnabled)
 		{
 			infiniteHealth->tick();
@@ -105,7 +104,7 @@ void Cheats::cheatStatus()
 void Cheats::cleanup()
 {
 	hookManager->removeAll();
-	screenManager->endSceneHook->remove();
+	screenManager->Cleanup();
 }
 
 

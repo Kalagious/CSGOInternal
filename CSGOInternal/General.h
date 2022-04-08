@@ -16,9 +16,21 @@
 void mainCode(HMODULE hModule);
 extern const float PI;
 
+class Vector2
+{
+public:
+	Vector2(float x, float y) { this->x = x; this->y = y; }
+	float x, y;
+};
 class Vector3
 {
 public:
-	Vector3(float xIn, float yIn, float zIn) { x = xIn; y = yIn; z = zIn; }
+	Vector3(float x, float y, float z) { this->x = x; this->y = y; this->z = z; }
 	float x, y, z;
+};
+class Vector4
+{
+public:
+	Vector4(float x, float y, float z, float w) { this->x = x; this->y = y; this->z = z; this->w = w; }
+	float x, y, z, w;
 };

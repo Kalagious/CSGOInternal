@@ -3,6 +3,9 @@
 
 void Cheats::keybinds()
 {
+	if (GetAsyncKeyState(VK_F1) & 0x01)
+		screenManager->ToggleGUI();
+
 	if (GetAsyncKeyState(VK_NUMPAD1) & 0x01)
 		infiniteHealth->enable = !infiniteHealth->enable;
 
@@ -17,6 +20,10 @@ void Cheats::keybinds()
 
 	if (GetAsyncKeyState(VK_NUMPAD5) & 0x01)
 		radar->enable = !radar->enable;
+
+	if (GetAsyncKeyState(VK_NUMPAD6) & 0x01)
+		esp->enable = !esp->enable;
+
 
 	if (GetAsyncKeyState(VK_XBUTTON2))
 		aimbot->enable = true;

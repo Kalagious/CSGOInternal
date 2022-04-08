@@ -28,7 +28,7 @@ void mainCode(HMODULE hModule)
 	while (!cheats.uninject)
 	{
 		cheats.tick();
-		if (GetAsyncKeyState(VK_F1) & 0x01)
+		if (GetAsyncKeyState(VK_END) & 0x01)
 			cheats.uninject = true;
 	}
 

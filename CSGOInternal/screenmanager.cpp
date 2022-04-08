@@ -1,14 +1,22 @@
 #include "screenmanager.h"
 #pragma warning(disable: 4244 26495)
 
-HWND ScreenManager::gameWindow;
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+HWND ScreenManager::gameWindowHandle;
 LPDIRECT3DDEVICE9 ScreenManager::d3dDevice;
+ScreenManager::OrigWndProcT ScreenManager::origWndProc;
+ScreenManager* screenManagerGlobal;
+
 
 ScreenManager::ScreenManager()
 {
     endSceneHook = NULL;
-    ScreenManager::gameWindow = NULL;
+    ScreenManager::gameWindowHandle = NULL;
+    ScreenManager::origWndProc = NULL;
     gameDimensions = { 0, 0, 0, 0, 0, 0 };
+    imGUIIsInitialized = false;
+    GUIIsVisable = false;
 }
 
 
@@ -25,7 +33,7 @@ BOOL CALLBACK ScreenManager::EnumWindowsProc(HWND hwnd, LPARAM lparam)
         uintptr_t thread = GetWindowThreadProcessId(hwnd, (LPDWORD)&windowProcessID);
         if (windowProcessID == GetProcessId(GetCurrentProcess()) && wsName.find(L"Direct3D") != -1)
         {
-            ScreenManager::gameWindow = hwnd;
+            ScreenManager::gameWindowHandle = hwnd;
             return false;
         }
     }
@@ -37,7 +45,7 @@ BOOL CALLBACK ScreenManager::EnumWindowsProc(HWND hwnd, LPARAM lparam)
 bool ScreenManager::GetGameWindow()
 {
     EnumWindows(ScreenManager::EnumWindowsProc, NULL);
-    if (ScreenManager::gameWindow)
+    if (ScreenManager::gameWindowHandle)
     {
         RecalculateWindowDimensions();
         return true;
@@ -60,7 +68,7 @@ bool ScreenManager::GetD3D9Device(void** table, size_t tableSize)
     D3DPRESENT_PARAMETERS d3dParams = {};
     d3dParams.Windowed = false;
     d3dParams.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    d3dParams.hDeviceWindow = ScreenManager::gameWindow;
+    d3dParams.hDeviceWindow = ScreenManager::gameWindowHandle;
 
     HRESULT dummyCreated = d3d->CreateDevice(NULL, D3DDEVTYPE_HAL, d3dParams.hDeviceWindow, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dParams, &d3dDeviceDummy);
     if (dummyCreated != S_OK)
@@ -91,7 +99,6 @@ bool ScreenManager::Initialize()
             printf("D3D Vtable Loaded\n");
             if (!d3d9DeviceVTable[42])
                 return false;
-
             endSceneHook = new EndSceneHook((uintptr_t)d3d9DeviceVTable[42]);
             endSceneHook->initialize();
             return true;
@@ -100,20 +107,27 @@ bool ScreenManager::Initialize()
     return false;
 }
 
+void ScreenManager::Cleanup()
+{
+
+    endSceneHook->remove();
+    SetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC, (LONG_PTR)ScreenManager::origWndProc);
+}
+
 void ScreenManager::RecalculateWindowDimensions()
 {
     RECT temp;
-    GetWindowRect(ScreenManager::gameWindow, &temp);
-    gameDimensions = { temp.left, temp.top, temp.right - temp.left - 6, temp.bottom - temp.top - 40, (temp.left + (temp.right - temp.left - 6) / 2), (temp.top + (temp.bottom - temp.top - 40) / 2) };
+    GetWindowRect(ScreenManager::gameWindowHandle, &temp);
+    gameDimensions = { temp.left, temp.top, temp.right - temp.left - 6, temp.bottom - temp.top - 40, (float)(temp.left + (temp.right - temp.left - 6) / 2), (float)(temp.top + (temp.bottom - temp.top - 40) / 2) };
 }
 
 std::string ScreenManager::GetWindowName()
 {
-    int nameLen = GetWindowTextLength(ScreenManager::gameWindow);
+    int nameLen = GetWindowTextLength(ScreenManager::gameWindowHandle);
     LPWSTR windowName = (LPWSTR)VirtualAlloc((LPVOID)NULL, (DWORD)(nameLen + 1), MEM_COMMIT, PAGE_READWRITE);
     if (windowName)
     {
-        GetWindowText(ScreenManager::gameWindow, windowName, nameLen + 1);
+        GetWindowText(ScreenManager::gameWindowHandle, windowName, nameLen + 1);
 
         std::wstring wsName(windowName);
         std::string strName(wsName.begin(), wsName.end());
@@ -122,5 +136,51 @@ std::string ScreenManager::GetWindowName()
     return "";
 }
 
+bool ScreenManager::InitializeImGUI()
+{
+    ScreenManager::origWndProc = (OrigWndProcT)GetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC);
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.FontDefault = io.Fonts->AddFontFromFileTTF("C:\\Users\\Jordan\\source\\repos\\CSGOInternal\\CSGOInternal\\ImGUI\\Fonts\\Exo2-Medium.ttf", 24.0f);
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    ImGui::StyleColorsDark();
+    ImGui_ImplWin32_Init(ScreenManager::gameWindowHandle);
+    ImGui_ImplDX9_Init(ScreenManager::d3dDevice);
+    imGUIIsInitialized = true;
+    printf("ImGUI Initialized\n");
+    return true;
+}
+
+
+void ScreenManager::ToggleGUI()
+{
+    if (GUIIsVisable)
+        SetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC, (LONG_PTR)origWndProc);
+    else
+        SetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC, (LONG_PTR)WndProc);
+
+    GUIIsVisable = !GUIIsVisable;
+}
+
+void ScreenManager::InputHandler()
+{
+    for (int i = 0; i < 5; i++) ImGui::GetIO().MouseDown[i] = false;
+
+    int button = -1;
+    if (GetAsyncKeyState(VK_LBUTTON)) button = 0;
+
+    if (button != -1) ImGui::GetIO().MouseDown[button] = true;
+}
+
+
+LRESULT CALLBACK ScreenManager::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
+
+    if (wParam == WM_LBUTTONDOWN)
+        printf("Mouse Moved\n");
+    ScreenManager::origWndProc(hwnd, msg, wParam, lParam);
+    return 0;
+}
 #pragma warning(default: 4244 26495)
 
