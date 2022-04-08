@@ -4,6 +4,7 @@
 
 #define gModule(x) (uintptr_t)GetModuleHandle(x)
 
+extern ScreenManager* screenManagerGlobal;
 
 Cheats::Cheats()
 {
@@ -27,6 +28,7 @@ Cheats::Cheats()
 	printf("Client Entity List found at %#8X\n", clientEntityListAddress);
 	
 	screenManager = new ScreenManager();
+	screenManagerGlobal = screenManager;
 	gameState = new GameState(clientDll);
 	entList = new EntList(clientEntityListAddress);
 	//viewMatrix = (float*)(clientDll + ViewMatrixOffset);

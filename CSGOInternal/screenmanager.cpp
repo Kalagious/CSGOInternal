@@ -16,7 +16,8 @@ ScreenManager::ScreenManager()
     ScreenManager::origWndProc = NULL;
     gameDimensions = { 0, 0, 0, 0, 0, 0 };
     imGUIIsInitialized = false;
-    GUIIsVisable = false;
+    GUIIsVisable = true;
+    theme = new ImGuiTheme();
 }
 
 
@@ -109,7 +110,7 @@ bool ScreenManager::Initialize()
 
 void ScreenManager::Cleanup()
 {
-
+    theme->SaveTheme();
     endSceneHook->remove();
     SetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC, (LONG_PTR)ScreenManager::origWndProc);
 }
@@ -143,7 +144,7 @@ bool ScreenManager::InitializeImGUI()
     ImGuiIO& io = ImGui::GetIO();
     io.FontDefault = io.Fonts->AddFontFromFileTTF("C:\\Users\\Jordan\\source\\repos\\CSGOInternal\\CSGOInternal\\ImGUI\\Fonts\\Exo2-Medium.ttf", 24.0f);
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    ImGui::StyleColorsDark();
+    theme->UpdateTheme();
     ImGui_ImplWin32_Init(ScreenManager::gameWindowHandle);
     ImGui_ImplDX9_Init(ScreenManager::d3dDevice);
     imGUIIsInitialized = true;

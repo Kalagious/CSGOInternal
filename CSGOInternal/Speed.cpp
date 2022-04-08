@@ -72,3 +72,14 @@ bool Speed::tick()
 	}
 	return true;
 }
+
+void Speed::drawSettings()
+{
+	ImGui::Dummy(ImVec2(0.0f, 20.0f)); 
+	if (ImGui::Button("Back")) 
+		screenManagerGlobal->GUIState = screenManagerGlobal->MAIN;
+	ImGui::Dummy(ImVec2(0.0f, 20.0f)); 
+	ImGui::Indent();
+	ImGui::SliderInt("Speed Multiplier", &speedMult, 0, 1500);
+	ImGui::Unindent();
+}

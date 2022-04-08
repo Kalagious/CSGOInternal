@@ -33,9 +33,6 @@
     <ClInclude Include="cheats.h">
       <Filter>Cheats</Filter>
     </ClInclude>
-    <ClInclude Include="module.h">
-      <Filter>Cheats</Filter>
-    </ClInclude>
     <ClInclude Include="hookoffsets.h">
       <Filter>Hooks</Filter>
     </ClInclude>
@@ -140,6 +137,12 @@
     <ClInclude Include="ImGUI\imstb_truetype.h">
       <Filter>ScreenManager\ImGUI</Filter>
     </ClInclude>
+    <ClInclude Include="module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="imguitheme.h">
+      <Filter>ScreenManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drawweaponguihook.cpp">
@@ -236,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>ScreenManager\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imguitheme.cpp">
+      <Filter>ScreenManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

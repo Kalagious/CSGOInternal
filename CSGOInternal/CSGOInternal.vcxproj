@@ -169,6 +169,7 @@
     <ClInclude Include="esp.h" />
     <ClInclude Include="fly.h" />
     <ClInclude Include="gamestate.h" />
+    <ClInclude Include="imguitheme.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
     <ClInclude Include="ImGUI\imgui_impl_dx9.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="esp.cpp" />
     <ClCompile Include="fly.cpp" />
     <ClCompile Include="gamestate.cpp" />
+    <ClCompile Include="imguitheme.cpp" />
     <ClCompile Include="hookmanager.cpp" />
     <ClCompile Include="hooks.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />

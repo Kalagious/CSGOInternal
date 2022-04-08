@@ -9,5 +9,7 @@ public:
 	ServerPlayer* serverPlayer;
 	ClientState* clientState;
 	bool tick();
-	float speedMult, xVel, yVel;
+	int speedMult;
+	float xVel, yVel;
+	void drawSettings();
 };

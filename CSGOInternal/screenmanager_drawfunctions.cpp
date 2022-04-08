@@ -40,25 +40,44 @@ void ScreenManager::DrawImGUI()
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
         ImGui::Begin("Skill Manager V1.1");
-		ImGui::Checkbox("Server Cheats Enabled", &cheatsGlobal->serverCheatsEnabled);
-		if (cheatsGlobal->serverCheatsEnabled)
+		
+		switch (GUIState)
 		{
-			ImGui::Text("Server Cheats:");
-			ImGui::Indent();
-			ImGui::Checkbox("Speed", &cheatsGlobal->speed->enable);
-			ImGui::Checkbox("Fly", &cheatsGlobal->fly->enable);
-			ImGui::Checkbox("Infinite Ammo", &cheatsGlobal->infiniteAmmo->enable);
-			ImGui::Checkbox("Infinite Health", &cheatsGlobal->infiniteHealth->enable);
-			ImGui::Checkbox("No Recoil", &cheatsGlobal->noRecoil->enable);
-			ImGui::Unindent();
+		case MAIN:
+			MainMenu();
+			break;
+		case SETTINGSSPEED:
+			cheatsGlobal->speed->drawSettings();
+			break;
+		case SETTINGSFLY:
+			cheatsGlobal->fly->drawSettings();
+			break;
+		case SETTINGSAMMO:
+			cheatsGlobal->infiniteAmmo->drawSettings();
+			break;
+		case SETTINGSHEALTH:
+			cheatsGlobal->infiniteHealth->drawSettings();
+			break;
+		case SETTINGSRECOIL:
+			cheatsGlobal->noRecoil->drawSettings();
+			break;
+		case SETTINGSAIMBOT:
+			cheatsGlobal->aimbot->drawSettings();
+			break;
+		case SETTINGSBHOP:
+			cheatsGlobal->bhop->drawSettings();
+			break;
+		case SETTINGSESP:
+			cheatsGlobal->esp->drawSettings();
+			break;
+		case SETTINGSRADAR:
+			cheatsGlobal->radar->drawSettings();
+			break;
+		case SETTINGSGUI:
+			theme->GUICustomizer();
 		}
-		ImGui::Text("Client Cheats:");
-		ImGui::Indent();
-		ImGui::Checkbox("Aimbot", &cheatsGlobal->aimbot->enable);
-		ImGui::Checkbox("BHop", &cheatsGlobal->bhop->enable);
-		ImGui::Checkbox("ESP", &cheatsGlobal->esp->enable);
-		ImGui::Checkbox("Radar", &cheatsGlobal->radar->enable);
-		ImGui::Unindent();
+
+		ImGui::Dummy(ImVec2(0.0f, 20.0f));
 		if (ImGui::Button("Uninject"))
 			cheatsGlobal->uninject = true;
 		ImGui::End();
@@ -73,5 +92,39 @@ void ScreenManager::DrawImGUI()
         ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
     }
 }
+
+#define MENUENTRYENABLE(x, y); ImGui::Checkbox(x->name.c_str(), &x->enable); ImGui::SameLine(200); if (ImGui::Button(std::string(x->name+" Settings").c_str())) GUIState = y;
+#define MENUENTRYNOENABLE(x, y); ImGui::Dummy(ImVec2(100.0f, 1.0f)); ImGui::Text(x->name.c_str()); ImGui::SameLine(200); if (ImGui::Button(std::string(x->name+" Settings").c_str())) GUIState = y;
+
+void ScreenManager::MainMenu() 
+{
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	ImGui::Checkbox("Server Cheats Enabled", &cheatsGlobal->serverCheatsEnabled);
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	if (cheatsGlobal->serverCheatsEnabled)
+	{
+		ImGui::Text("Server Cheats:");
+		ImGui::Indent();
+		MENUENTRYENABLE(cheatsGlobal->speed, SETTINGSSPEED);
+		MENUENTRYNOENABLE(cheatsGlobal->fly, SETTINGSFLY);
+		MENUENTRYENABLE(cheatsGlobal->infiniteAmmo, SETTINGSAMMO);
+		MENUENTRYENABLE(cheatsGlobal->infiniteHealth, SETTINGSHEALTH);
+		MENUENTRYENABLE(cheatsGlobal->noRecoil, SETTINGSRECOIL);
+		ImGui::Unindent();
+		ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	}
+	ImGui::Text("Client Cheats:");
+	ImGui::Indent();
+	MENUENTRYNOENABLE(cheatsGlobal->aimbot, SETTINGSAIMBOT);
+	MENUENTRYENABLE(cheatsGlobal->bhop, SETTINGSBHOP);
+	MENUENTRYENABLE(cheatsGlobal->esp, SETTINGSESP);
+	MENUENTRYENABLE(cheatsGlobal->radar, SETTINGSRADAR);
+	ImGui::Unindent();
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	if (ImGui::Button("Customize GUI"))
+		GUIState = SETTINGSGUI;
+}
+
+
 
 #pragma warning(default: 4838)
