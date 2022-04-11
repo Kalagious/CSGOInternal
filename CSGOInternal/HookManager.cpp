@@ -1,7 +1,6 @@
 #include "hookmanager.h"
 
 
-
 HookManager::HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, ServerPlayer* serverPlayerIn)
 {
 	CSGOExe = CSGOExeIn;
@@ -13,8 +12,17 @@ HookManager::HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t C
 	setPositionHook = new SetPositionHook(ServerDll);
 	setYawOffsetHook = new SetYawOffsetHook(ServerDll);
 	setClientViewAnglesHook = new SetClientViewAnglesHook(EngineDll);
-	drawWeaponGUIHook = new DrawWeaponGUIHook(ClientDll);
 	testingHook = new TestingHook(ClientDll);
+}
+
+
+void HookManager::InitalizeHooks()
+{
+	printf(" [*] Initializing Game Hooks:\n");
+	setClientViewAnglesHook->initialize();
+	setLocalVelHook->initialize();
+	setPositionHook->initialize();
+	setYawOffsetHook->initialize();
 }
 
 
@@ -31,7 +39,4 @@ void HookManager::removeAll()
 
 	if (setYawOffsetHook->enabled)
 		setYawOffsetHook->remove();
-
-	if (drawWeaponGUIHook->enabled)
-		drawWeaponGUIHook->remove();
 }

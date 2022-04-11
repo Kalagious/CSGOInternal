@@ -17,12 +17,13 @@ bool EntList::load()
 		return false;
 	EntListNode* nodeItr = startNode;
 	cheatsGlobal->clientEntList.clear();
+	printf(" [*] Loading Entity List:\n");
 	while (nodeItr)
 	{
 		if (nodeItr->entity && *(uintptr_t*)(nodeItr->entity) == cheatsGlobal->C_CSPlayerPtr)
 		{
 			cheatsGlobal->clientEntList.push_back(nodeItr->entity);
-			printf("%#8X\n", (uintptr_t)nodeItr->entity);
+			printf("	Entity %d: (%#8X)\n", cheatsGlobal->clientEntList.size(), (uintptr_t)nodeItr->entity);
 		}
 		nodeItr = nodeItr->nextNode;
 	}

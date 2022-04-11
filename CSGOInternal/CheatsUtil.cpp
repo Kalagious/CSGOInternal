@@ -14,6 +14,8 @@ Cheats::Cheats()
 	C_CSPlayerPtr = NULL;
 	heldWeapon = NULL;
 	hookManager = NULL;
+	clientPlayer = NULL;
+	serverPlayer = NULL;
 
 	csgoExe = gModule(L"csgo.exe");
 	clientDll = gModule(L"client.dll");
@@ -22,10 +24,10 @@ Cheats::Cheats()
 	inputSystemDll = gModule(L"inputsystem.dll");
 
 	clientState = (ClientState*)*(uintptr_t*)(engineDll + ClientStateOffset); // No recalculation
-	printf("Client Player State at %#8X\n", (uintptr_t)clientState);
+	printf(" [*] Client Player State at %#8X\n", (uintptr_t)clientState);
 
 	clientEntityListAddress = (uintptr_t)(clientDll + ClientEntityListOffset); // No recalculation
-	printf("Client Entity List found at %#8X\n", clientEntityListAddress);
+	printf(" [*] Client Entity List found at %#8X\n", clientEntityListAddress);
 	
 	screenManager = new ScreenManager();
 	screenManagerGlobal = screenManager;
@@ -113,18 +115,13 @@ void Cheats::cleanup()
 void Cheats::initializeHooks()
 {
 	hookManager = new HookManager(csgoExe, serverDll, clientDll, engineDll, serverPlayer);
-	hookManager->setClientViewAnglesHook->initialize();
-	hookManager->setLocalVelHook->initialize();
-	hookManager->setPositionHook->initialize();
-	hookManager->setYawOffsetHook->initialize();
+	hookManager->InitalizeHooks();
+		
 	if (!screenManager->Initialize())
 	{
-		printf("[*] Error Hooking D3D!\n");
+		printf(" [!] Error Hooking D3D!\n");
 		uninject = true;
 	}
-	//hookManager->testingHook->initialize();
-	//hookManager->drawWeaponGUIHook->initialize();
-
 }
 
 

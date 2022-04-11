@@ -85,3 +85,16 @@ bool Fly::tick()
 	}
 	return true;
 }
+
+void Fly::drawSettings()
+{
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	if (ImGui::Button("Back"))
+		screenManagerGlobal->GUIState = screenManagerGlobal->MAIN;
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	ImGui::Indent();
+	ImGui::SliderFloat("Fly Speed Multiplier", &flyMult, 0, 50);
+	ImGui::SliderFloat("Vertical Speed Multiplier", &vertMult, 0, 50);
+
+	ImGui::Unindent();
+}

@@ -1,5 +1,6 @@
 #pragma once
-#include "ServerPlayer.h"
-#include "ClientState.h"
-#include "ServerWeapon.h"
-#include "ClientPlayer.h"
+#include "serverplayer.h"
+#include "clientstate.h"
+#include "serverweapon.h"
+#include "clientplayer.h"
+#include "clientrendermatrixes.h"

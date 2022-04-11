@@ -18,7 +18,7 @@ void mainCode(HMODULE hModule)
 	info.dwSize = 100;
 	info.bVisible = false;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-	printf("Starting!\n");
+	printf(" [*] Starting!\n");
 	
 	Cheats cheats;
 	cheatsGlobal = &cheats;

@@ -30,7 +30,7 @@ SetYawOffsetHook::SetYawOffsetHook(uintptr_t moduleBaseIn)
 
 bool SetYawOffsetHook::initialize()
 {
-	printf("Hooking %s function at %#8x\n", hookName.c_str(), (uintptr_t)SetYawOffsetHook::oFunction);
+	PrintHookPrompt();	
 	SetYawOffsetHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)SetYawOffsetHook::oFunction, (uintptr_t)SetYawOffsetHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

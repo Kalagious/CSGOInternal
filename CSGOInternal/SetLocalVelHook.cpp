@@ -43,7 +43,7 @@ SetLocalVelHook::SetLocalVelHook(uintptr_t moduleBaseIn)
 
 bool SetLocalVelHook::initialize()
 {
-	printf("Hooking %s function at %#8x\n", hookName.c_str(), (uintptr_t)SetLocalVelHook::oFunction);
+	PrintHookPrompt();	
 	SetLocalVelHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)SetLocalVelHook::oFunction, (uintptr_t)SetLocalVelHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

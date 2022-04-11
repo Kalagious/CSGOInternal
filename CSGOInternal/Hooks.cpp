@@ -30,10 +30,10 @@ bool Hook::detour32(uintptr_t src, uintptr_t dst, uint32_t len)
 	return true;
 }
 
-
-
-
-
+void Hook::PrintHookPrompt()
+{
+	printf("	Hooking %s\n", hookName.c_str());
+}
 
 
 uintptr_t Hook::trampoline32(uintptr_t src, uintptr_t dst, uint32_t len)
@@ -43,7 +43,7 @@ uintptr_t Hook::trampoline32(uintptr_t src, uintptr_t dst, uint32_t len)
 
 	if (!gatewayAddr)
 	{
-		printf("Error allocating gateway\n");
+		printf(" [!] Error allocating gateway\n");
 		return false;
 	}
 

@@ -16,8 +16,8 @@ void ScreenManager::Line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, flo
 	if (!d3dLine)
 		D3DXCreateLine(ScreenManager::d3dDevice, &d3dLine);
 	D3DXVECTOR2 linePts[2];
-	linePts[0] = D3DXVECTOR2(x1, y1);
-	linePts[1] = D3DXVECTOR2(x2, y2);
+	linePts[0] = D3DXVECTOR2((float)x1, (float)y1);
+	linePts[1] = D3DXVECTOR2((float)x2, (float)y2);
 	d3dLine->SetWidth(w);
 	d3dLine->Draw(linePts, 2, color);
 }
@@ -124,7 +124,4 @@ void ScreenManager::MainMenu()
 	if (ImGui::Button("Customize GUI"))
 		GUIState = SETTINGSGUI;
 }
-
-
-
 #pragma warning(default: 4838)

@@ -10,7 +10,6 @@
 #include "setpositionhook.h"
 #include "setclientviewangleshook.h"
 #include "setyawoffsethook.h"
-#include "drawweaponguihook.h"
 #include "testinghook.h"
 #include "endscenehook.h"
 
@@ -21,10 +20,10 @@ public:
 	SetPositionHook* setPositionHook;
 	SetYawOffsetHook* setYawOffsetHook;
 	SetClientViewAnglesHook* setClientViewAnglesHook;
-	DrawWeaponGUIHook* drawWeaponGUIHook;
 	TestingHook* testingHook;
 	HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, ServerPlayer* serverPlayerIn);
 	void removeAll();
+	void InitalizeHooks();
 	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll;
 	ServerPlayer* serverPlayer;
 

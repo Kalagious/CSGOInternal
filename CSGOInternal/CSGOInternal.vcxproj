@@ -162,8 +162,8 @@
     <ClInclude Include="allmodules.h" />
     <ClInclude Include="bhop.h" />
     <ClInclude Include="clientplayer.h" />
+    <ClInclude Include="clientrendermatrixes.h" />
     <ClInclude Include="clientstate.h" />
-    <ClInclude Include="drawweaponguihook.h" />
     <ClInclude Include="endscenehook.h" />
     <ClInclude Include="entlist.h" />
     <ClInclude Include="esp.h" />
@@ -205,7 +205,6 @@
     <ClCompile Include="cheatskeybinds.cpp" />
     <ClCompile Include="cheatsutil.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="drawweaponguihook.cpp" />
     <ClCompile Include="endscenehook.cpp" />
     <ClCompile Include="entlist.cpp" />
     <ClCompile Include="esp.cpp" />

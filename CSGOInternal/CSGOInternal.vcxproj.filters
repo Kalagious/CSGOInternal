@@ -81,9 +81,6 @@
     <ClInclude Include="setyawoffsethook.h">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="drawweaponguihook.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
     <ClInclude Include="clientplayer.h">
       <Filter>GameClasses</Filter>
     </ClInclude>
@@ -143,11 +140,11 @@
     <ClInclude Include="imguitheme.h">
       <Filter>ScreenManager</Filter>
     </ClInclude>
+    <ClInclude Include="clientrendermatrixes.h">
+      <Filter>GameClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="drawweaponguihook.cpp">
-      <Filter>Hooks</Filter>
-    </ClCompile>
     <ClCompile Include="hookmanager.cpp">
       <Filter>Hooks</Filter>
     </ClCompile>

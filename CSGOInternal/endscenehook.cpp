@@ -34,7 +34,7 @@ EndSceneHook::EndSceneHook(uintptr_t endSceneAddr)
 
 bool EndSceneHook::initialize()
 {
-	printf("Hooking %s function at %#8x\n", hookName.c_str(), (uintptr_t)EndSceneHook::oFunction);
+	printf(" [*] Hooking %s function at %#8x\n", hookName.c_str(), (uintptr_t)EndSceneHook::oFunction);
 	EndSceneHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)EndSceneHook::oFunction, (uintptr_t)EndSceneHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

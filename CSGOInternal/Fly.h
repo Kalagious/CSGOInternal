@@ -9,5 +9,6 @@ public:
 	ServerPlayer* serverPlayer;
 	ClientState* clientState;
 	bool tick();
+	void drawSettings();
 	float flyMult, vertMult, xPos, yPos, zPos;
 };

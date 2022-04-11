@@ -36,7 +36,7 @@ SetPositionHook::SetPositionHook(uintptr_t moduleBaseIn)
 
 bool SetPositionHook::initialize()
 {
-	printf("%s function at %#8x\n", hookName.c_str(), (uintptr_t)SetPositionHook::oFunction);
+	PrintHookPrompt();	
 	SetPositionHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)SetPositionHook::oFunction, (uintptr_t)SetPositionHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

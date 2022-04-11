@@ -23,5 +23,6 @@ public:
 	bool detour32(uintptr_t src, uintptr_t dst, uint32_t len);
 	uintptr_t trampoline32(uintptr_t src, uintptr_t dst, uint32_t len);
 	bool remove();
+	void PrintHookPrompt();
 };
 #pragma warning(default:26495)

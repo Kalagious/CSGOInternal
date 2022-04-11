@@ -39,6 +39,7 @@ SetClientViewAnglesHook::SetClientViewAnglesHook(uintptr_t moduleBaseIn)
 
 bool SetClientViewAnglesHook::initialize()
 {
+	PrintHookPrompt();
 	SetClientViewAnglesHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)SetClientViewAnglesHook::oFunction, (uintptr_t)SetClientViewAnglesHook::hookFunction, hookLen);
 	enabled = true;
 	return true;

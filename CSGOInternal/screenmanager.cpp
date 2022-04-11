@@ -94,10 +94,9 @@ bool ScreenManager::Initialize()
 {
     if (GetGameWindow())
     {
-        printf("%s\n", GetWindowName().c_str());
         if (GetD3D9Device(d3d9DeviceVTable, sizeof(d3d9DeviceVTable)))
         {
-            printf("D3D Vtable Loaded\n");
+            printf(" [*] D3D Vtable Loaded\n");
             if (!d3d9DeviceVTable[42])
                 return false;
             endSceneHook = new EndSceneHook((uintptr_t)d3d9DeviceVTable[42]);
@@ -148,7 +147,7 @@ bool ScreenManager::InitializeImGUI()
     ImGui_ImplWin32_Init(ScreenManager::gameWindowHandle);
     ImGui_ImplDX9_Init(ScreenManager::d3dDevice);
     imGUIIsInitialized = true;
-    printf("ImGUI Initialized\n");
+    printf(" [*] ImGUI Initialized\n");
     return true;
 }
 
@@ -177,9 +176,6 @@ void ScreenManager::InputHandler()
 LRESULT CALLBACK ScreenManager::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
-
-    if (wParam == WM_LBUTTONDOWN)
-        printf("Mouse Moved\n");
     ScreenManager::origWndProc(hwnd, msg, wParam, lParam);
     return 0;
 }

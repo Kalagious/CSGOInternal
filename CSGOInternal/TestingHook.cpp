@@ -30,7 +30,7 @@ TestingHook::TestingHook(uintptr_t moduleBaseIn)
 
 bool TestingHook::initialize()
 {
-	printf("%s function at %#8x\n", hookName.c_str(), (uintptr_t)TestingHook::oFunction);
+	PrintHookPrompt();	
 	TestingHook::oFunction = (tTargetPtr)trampoline32((uintptr_t)TestingHook::oFunction, (uintptr_t)TestingHook::hookFunction, hookLen);
 	enabled = true;
 	return true;
