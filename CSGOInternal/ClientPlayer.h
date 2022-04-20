@@ -36,7 +36,9 @@ public:
 	Vector3 v_Position2; //0x00AC
 	char pad_00B8[53]; //0x00B8
 	bool b_Dormant; //0x00ED
-	char pad_00EE[18]; //0x00EE
+	char pad_00EE[6]; //0x00EE
+	int32_t i_Team; //0x00F4
+	char pad_00F8[8]; //0x00F8
 	int32_t i_Health; //0x0100
 	bool b_IsOnGround; //0x0104
 	char pad_0105[11]; //0x0105
@@ -53,12 +55,14 @@ public:
 	class IInterpolatedVar m_iv_angRotation; //0x0404
 	char pad_0430[1360]; //0x0430
 	bool b_IsSpotted; //0x0980
-	char pad_0981[9971]; //0x0981
+	char pad_0981[7463]; //0x0981
+	float* p_BoneArray; //0x26A8
+	char pad_26AC[2504]; //0x26AC
 	class IInterpolatedVar m_iv_viewPunchAngle; //0x3074
 	class IInterpolatedVar m_iv_aimPunchAngle; //0x30A0
 	class IInterpolatedVar m_iv_aimPunchAngleVel; //0x30CC
 	char pad_30F8[744]; //0x30F8
 	class IInterpolatedVar m_iv_vecViewOffset; //0x33E0
-	char pad_340C[1480]; //0x340C
-}; //Size: 0x39D4
-static_assert(sizeof(ClientPlayer) == 0x39D4);
+	char pad_340C[1040]; //0x340C
+}; //Size: 0x381C
+static_assert(sizeof(ClientPlayer) == 0x381C);

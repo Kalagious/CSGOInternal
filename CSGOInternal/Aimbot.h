@@ -10,6 +10,9 @@ public:
 	ClientPlayer* clientPlayer;
 	std::vector<ClientPlayer*>* entList;
 	bool tick();
+	void drawSettings();
+
+	int32_t targetBoneID;
 	float aimbotStrength, newYawOut, newPitchOut;
 };
 

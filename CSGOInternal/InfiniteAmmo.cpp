@@ -5,9 +5,8 @@ InfiniteAmmo::InfiniteAmmo()
 {
 	name = "Infinite Ammo";
 	serverModule = true;
-	enable = false;
+	enable = true;
 }
-
 
 
 bool InfiniteAmmo::tick()

@@ -4,9 +4,6 @@
     <Filter Include="Hooks">
       <UniqueIdentifier>{bf9ea857-ed6d-4744-809b-c58b7c261fab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{280c0d49-f3cf-4377-bc62-8cb5dac258ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameClasses">
       <UniqueIdentifier>{ba832bc3-c3fa-4df5-8fe6-fdadad361053}</UniqueIdentifier>
     </Filter>
@@ -21,6 +18,27 @@
     </Filter>
     <Filter Include="ScreenManager\ImGUI">
       <UniqueIdentifier>{06a69ab2-8498-4f52-bfa9-0665ee7b070d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{280c0d49-f3cf-4377-bc62-8cb5dac258ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Visual">
+      <UniqueIdentifier>{04737daf-81b4-4c7a-9bbf-db149b8fbb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Aim">
+      <UniqueIdentifier>{cd90f9fd-6ac3-43a9-83e8-dcbb6d739e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Movement">
+      <UniqueIdentifier>{ec857f37-ec8a-4ad5-bd12-b99c5b1bb132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Player">
+      <UniqueIdentifier>{c0bf5dc4-0264-4d97-b19d-f6cd5eee4aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFunctions">
+      <UniqueIdentifier>{861d4dd1-5888-406e-8ca3-e67ca2a9ba48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{5a1fb60f-9fe4-4ada-b4c7-1d6273089c2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,20 +63,11 @@
     <ClInclude Include="hookmanager.h">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="infinitehealth.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="speed.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="serverplayer.h">
       <Filter>GameClasses</Filter>
     </ClInclude>
     <ClInclude Include="clientstate.h">
       <Filter>GameClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="aimbot.h">
-      <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="allmodules.h">
       <Filter>Modules</Filter>
@@ -66,17 +75,8 @@
     <ClInclude Include="setclientviewangleshook.h">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="fly.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="infiniteammo.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="serverweapon.h">
       <Filter>GameClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="norecoil.h">
-      <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="setyawoffsethook.h">
       <Filter>Hooks</Filter>
@@ -90,15 +90,6 @@
     <ClInclude Include="gamestate.h">
       <Filter>Cheats\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="entlist.h">
-      <Filter>Cheats\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="bhop.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="radar.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="general.h" />
     <ClInclude Include="offsets.h" />
     <ClInclude Include="screenmanager.h">
@@ -106,9 +97,6 @@
     </ClInclude>
     <ClInclude Include="endscenehook.h">
       <Filter>ScreenManager</Filter>
-    </ClInclude>
-    <ClInclude Include="esp.h">
-      <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ImGUI\imconfig.h">
       <Filter>ScreenManager\ImGUI</Filter>
@@ -137,10 +125,61 @@
     <ClInclude Include="module.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="imguitheme.h">
-      <Filter>ScreenManager</Filter>
+    <ClInclude Include="camera.h">
+      <Filter>GameClasses</Filter>
     </ClInclude>
-    <ClInclude Include="clientrendermatrixes.h">
+    <ClInclude Include="esp.h">
+      <Filter>Modules\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="radar.h">
+      <Filter>Modules\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="aimbot.h">
+      <Filter>Modules\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="norecoil.h">
+      <Filter>Modules\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="bhop.h">
+      <Filter>Modules\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="fly.h">
+      <Filter>Modules\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="speed.h">
+      <Filter>Modules\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="infiniteammo.h">
+      <Filter>Modules\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="infinitehealth.h">
+      <Filter>Modules\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="tracers.h">
+      <Filter>Modules\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="glow.h">
+      <Filter>Modules\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="traceray.h">
+      <Filter>GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="gamefunctionmanager.h">
+      <Filter>GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="traceResult.h">
+      <Filter>GameClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="enginetraceclient.h">
+      <Filter>GameClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="interfacemanager.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="cliententitylist.h">
       <Filter>GameClasses</Filter>
     </ClInclude>
   </ItemGroup>
@@ -168,30 +207,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="aimbot.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="bhop.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="fly.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="infiniteammo.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="infinitehealth.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="norecoil.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="radar.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="speed.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="cheatskeybinds.cpp">
       <Filter>Cheats</Filter>
     </ClCompile>
@@ -207,14 +222,8 @@
     <ClCompile Include="gamestate.cpp">
       <Filter>Cheats\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="entlist.cpp">
-      <Filter>Cheats\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="endscenehook.cpp">
       <Filter>ScreenManager</Filter>
-    </ClCompile>
-    <ClCompile Include="esp.cpp">
-      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ImGUI\imgui.cpp">
       <Filter>ScreenManager\ImGUI</Filter>
@@ -237,8 +246,47 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>ScreenManager\ImGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imguitheme.cpp">
-      <Filter>ScreenManager</Filter>
+    <ClCompile Include="esp.cpp">
+      <Filter>Modules\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="radar.cpp">
+      <Filter>Modules\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="aimbot.cpp">
+      <Filter>Modules\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="norecoil.cpp">
+      <Filter>Modules\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="bhop.cpp">
+      <Filter>Modules\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="fly.cpp">
+      <Filter>Modules\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="speed.cpp">
+      <Filter>Modules\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="infiniteammo.cpp">
+      <Filter>Modules\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="infinitehealth.cpp">
+      <Filter>Modules\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="tracers.cpp">
+      <Filter>Modules\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="glow.cpp">
+      <Filter>Modules\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="traceray.cpp">
+      <Filter>GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="gamefunctionmanager.cpp">
+      <Filter>GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="interfacemanager.cpp">
+      <Filter>Interfaces</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

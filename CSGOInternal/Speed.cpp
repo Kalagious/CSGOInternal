@@ -8,7 +8,7 @@ Speed::Speed()
 	name = "Speed";
 	serverModule = true;
 	speedMult = 800;
-	enable = false;
+	enable = true;
 }
 
 bool Speed::tick()

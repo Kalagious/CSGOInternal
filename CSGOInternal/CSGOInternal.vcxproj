@@ -161,15 +161,17 @@
     <ClInclude Include="allclasses.h" />
     <ClInclude Include="allmodules.h" />
     <ClInclude Include="bhop.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="cliententitylist.h" />
     <ClInclude Include="clientplayer.h" />
-    <ClInclude Include="clientrendermatrixes.h" />
     <ClInclude Include="clientstate.h" />
     <ClInclude Include="endscenehook.h" />
-    <ClInclude Include="entlist.h" />
+    <ClInclude Include="enginetraceclient.h" />
     <ClInclude Include="esp.h" />
     <ClInclude Include="fly.h" />
+    <ClInclude Include="gamefunctionmanager.h" />
     <ClInclude Include="gamestate.h" />
-    <ClInclude Include="imguitheme.h" />
+    <ClInclude Include="glow.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
     <ClInclude Include="ImGUI\imgui_impl_dx9.h" />
@@ -179,6 +181,8 @@
     <ClInclude Include="ImGUI\imstb_textedit.h" />
     <ClInclude Include="ImGUI\imstb_truetype.h" />
     <ClInclude Include="infiniteammo.h" />
+    <ClInclude Include="interfacemanager.h" />
+    <ClInclude Include="interfaces.h" />
     <ClInclude Include="module.h" />
     <ClInclude Include="cheats.h" />
     <ClInclude Include="general.h" />
@@ -198,6 +202,9 @@
     <ClInclude Include="setyawoffsethook.h" />
     <ClInclude Include="speed.h" />
     <ClInclude Include="testinghook.h" />
+    <ClInclude Include="traceray.h" />
+    <ClInclude Include="traceResult.h" />
+    <ClInclude Include="tracers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aimbot.cpp" />
@@ -206,11 +213,11 @@
     <ClCompile Include="cheatsutil.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="endscenehook.cpp" />
-    <ClCompile Include="entlist.cpp" />
     <ClCompile Include="esp.cpp" />
     <ClCompile Include="fly.cpp" />
+    <ClCompile Include="gamefunctionmanager.cpp" />
     <ClCompile Include="gamestate.cpp" />
-    <ClCompile Include="imguitheme.cpp" />
+    <ClCompile Include="glow.cpp" />
     <ClCompile Include="hookmanager.cpp" />
     <ClCompile Include="hooks.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
@@ -222,6 +229,7 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="infiniteammo.cpp" />
     <ClCompile Include="infinitehealth.cpp" />
+    <ClCompile Include="interfacemanager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="norecoil.cpp" />
     <ClCompile Include="radar.cpp" />
@@ -233,6 +241,8 @@
     <ClCompile Include="setyawoffsethook.cpp" />
     <ClCompile Include="speed.cpp" />
     <ClCompile Include="testinghook.cpp" />
+    <ClCompile Include="traceray.cpp" />
+    <ClCompile Include="tracers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

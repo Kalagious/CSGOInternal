@@ -5,7 +5,7 @@ InfiniteHealth::InfiniteHealth()
 {
 	name = "Infinite Health";
 	serverModule = true;
-	enable = false;
+	enable = true;
 }
 
 bool InfiniteHealth::tick()

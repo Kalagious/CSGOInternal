@@ -3,4 +3,7 @@
 #include "clientstate.h"
 #include "serverweapon.h"
 #include "clientplayer.h"
-#include "clientrendermatrixes.h"
+#include "camera.h"
+#include "traceResult.h"
+#include "enginetraceclient.h"
+#include "cliententitylist.h"

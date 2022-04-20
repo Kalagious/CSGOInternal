@@ -790,6 +790,7 @@ void ImGuiTheme::UpdateTheme()
 	colors[ImGuiCol_ModalWindowDimBg].y = ModalWindowDimBg[1];
 	colors[ImGuiCol_ModalWindowDimBg].z = ModalWindowDimBg[2];
 	colors[ImGuiCol_ModalWindowDimBg].w = ModalWindowDimBg[3];
+
 	
 }
 

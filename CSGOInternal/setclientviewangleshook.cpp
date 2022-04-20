@@ -15,7 +15,6 @@ SetClientViewAnglesHook::tTargetPtr SetClientViewAnglesHook::oFunction;
 
 void __stdcall SetClientViewAnglesHook::hookFunction(float* viewAnglesIn)
 {
-	cheatsGlobal->aimbot->tick();
 	if (cheatsGlobal->aimbot->enable && cheatsGlobal->aimbot->newYawOut != 720 && cheatsGlobal->aimbot->newPitchOut != 720)
 	{
 		viewAnglesIn[1] = cheatsGlobal->aimbot->newYawOut;

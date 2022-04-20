@@ -1,7 +1,9 @@
-#include "Aimbot.h"
-#include "entlist.h"
+#include "aimbot.h"
+#include "cheats.h"
 
 // !!!HOOK!!!! Uses a hook on the client view angle function
+class Cheats;
+extern Cheats* cheatsGlobal;
 
 Aimbot::Aimbot(std::vector<ClientPlayer*>* entList)
 {
@@ -9,6 +11,7 @@ Aimbot::Aimbot(std::vector<ClientPlayer*>* entList)
 	name = "Aimbot";
 	serverModule = false;
 	enable = false;
+	targetBoneID = 8;
 }
 
 
@@ -18,23 +21,25 @@ bool Aimbot::tick()
 	{
 		if (!clientPlayer || !entList)
 			return false;
-		Vector3 pos1 = clientPlayer->v_Position1;
 
+
+		Matrix3x4 currBone = Matrix3x4();
+		currBone.setData((float*)(clientPlayer->p_BoneArray + targetBoneID * 12));
+		Vector3 pos1 = Vector3(currBone.data[3], currBone.data[7], currBone.data[11]);
 		Vector3 lowestDist(0, -1, 0);
+		Vector3 pos2 = Vector3();
+
 		
 		for (uint32_t i = 0; i < entList->size(); i++)
-		{
-			
-			if (entList->at(i) != clientPlayer && IsValidEnt(entList->at(i)))
+		{	
+			if (entList->at(i) != clientPlayer && cheatsGlobal->IsValidAndAliveEnt(entList->at(i)) && entList->at(i)->i_Team != clientPlayer->i_Team)
 			{
-				if (lowestDist.y == -1)
+				currBone.setData((float*)(entList->at(i)->p_BoneArray + targetBoneID * 0x30));
+				pos2 = Vector3(currBone.data[3], currBone.data[7], currBone.data[11]);
+
+				if (sqrt(pow((pos2.x - pos1.x), 2) + pow((pos2.y - pos1.y), 2)) < lowestDist.x || lowestDist.y == -1)
 				{
-					lowestDist.x = (float)sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
-					lowestDist.y = (float)i;
-				}
-				if (sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2)) < lowestDist.x)
-				{
-					lowestDist.x = (float)sqrt(pow((pos1.x - entList->at(i)->v_Position1.x), 2) + pow((pos1.y - entList->at(i)->v_Position1.y), 2));
+					lowestDist.x = (float)sqrt(pow((pos2.x - pos1.x), 2) + pow((pos2.y - pos1.y), 2));
 					lowestDist.y = (float)i;
 				}
 			}
@@ -42,16 +47,15 @@ bool Aimbot::tick()
 
 		if (lowestDist.y != -1)
 		{
-			Vector3 pos2 = entList->at((uint32_t)lowestDist.y)->v_Position1;
-
-			pos2.z += entList->at((uint32_t)lowestDist.y)->f_PlayerHeight - clientPlayer->f_PlayerHeight;
+			currBone.setData((float*)(entList->at((uint32_t)lowestDist.y)->p_BoneArray + targetBoneID * 12));
+			pos2 = Vector3(currBone.data[3], currBone.data[7], currBone.data[11]);
 
 			float newYaw = atan((pos2.y - pos1.y) / (pos2.x - pos1.x));
 			float newPitch = atan((pos2.z - pos1.z) / lowestDist.x);
 
 			
 			newYaw *= (float)(180.0 / PI);
-			newPitch *= (float)(- 180.0 / PI);
+			newPitch *= (float)(-180.0 / PI);
 
 			if (pos2.x > pos1.x)
 				newYaw = (float)(180.0 + newYaw);
@@ -75,4 +79,13 @@ bool Aimbot::tick()
 		}
 	}
 	return true;
+}
+
+void Aimbot::drawSettings()
+{
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	if (ImGui::Button("Back"))
+		screenManagerGlobal->GUIState = screenManagerGlobal->MAIN;
+	ImGui::Dummy(ImVec2(0.0f, 20.0f));
+	ImGui::InputInt("TargetBoneID", &targetBoneID);
 }

@@ -3,8 +3,9 @@
 #include "ImGUI/imgui.h"
 #include "ImGUI/imgui_impl_dx9.h"
 #include "ImGUI/imgui_impl_win32.h"
-#include "imguitheme.h"
 #include "endscenehook.h"
+#include "offsets.h"
+#include <string>
 
 struct windowDimensions {
 	int32_t x, y;
@@ -12,12 +13,10 @@ struct windowDimensions {
 	float cx, cy;
 };
 
-class ImGuiTheme;
-
 class ScreenManager
 {
 public:
-	ScreenManager();
+	ScreenManager(uintptr_t clientDll);
 	bool Initialize();
 	bool InitializeImGUI();
 	void Cleanup();
@@ -27,14 +26,18 @@ public:
 	bool GetD3D9Device(void** table, size_t tableSize);
 	std::string GetWindowName();
 	void RecalculateWindowDimensions();
+	Vector3 WorldToScreen(Vector3 position, Vector2 screen);
+	Vector3 WorldToScreen(float x, float y, float z, Vector2 screen);
 	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM param);
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	ID3DXLine* d3dLine;
-    ImGuiTheme* theme;
+	ID3DXFont* espNameFont;
+	Camera* playerCamera;
 	void* d3d9DeviceVTable[119];
 	bool imGUIIsInitialized;
 	bool GUIIsVisable;
 	uint32_t GUIState;
+	Matrix4x4* viewMatrix;
 	enum GUIStates
 	{
 		MAIN = 0,
@@ -47,7 +50,8 @@ public:
 		SETTINGSBHOP = 7,
 		SETTINGSESP = 8,
 		SETTINGSRADAR = 9,
-		SETTINGSGUI = 10,
+		SETTINGSTRACERS = 10,
+		
 	};
 	static LPDIRECT3DDEVICE9 d3dDevice;
 	EndSceneHook* endSceneHook;
@@ -62,5 +66,6 @@ public:
 	void Text(uint32_t x, uint32_t y, uint32_t w, uint32_t h, std::string text, D3DCOLOR color);
 	void DrawImGUI();
 	void MainMenu();
+	bool initialized;
 };
 

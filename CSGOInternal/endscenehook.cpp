@@ -3,18 +3,31 @@
 #include "cheats.h"
 
 extern Cheats* cheatsGlobal;
+extern ScreenManager* screenManagerGlobal;
+
 EndSceneHook::tTargetPtr EndSceneHook::oFunction;
 
 void APIENTRY EndSceneHook::hookFunction(LPDIRECT3DDEVICE9 device)
 {
+	cheatsGlobal->aimbot->tick();
+
 	if (!ScreenManager::d3dDevice)
 		ScreenManager::d3dDevice = device;
 
-	if (!cheatsGlobal->screenManager->imGUIIsInitialized && ScreenManager::d3dDevice)
-		cheatsGlobal->screenManager->InitializeImGUI();
+	if (!cheatsGlobal->esp->initialized && ScreenManager::d3dDevice)
+		cheatsGlobal->esp->initialize();
 
-	if (cheatsGlobal->screenManager->imGUIIsInitialized)
-		cheatsGlobal->screenManager->DrawImGUI();
+	if (!screenManagerGlobal->imGUIIsInitialized && ScreenManager::d3dDevice)
+		screenManagerGlobal->InitializeImGUI();
+
+	if (!cheatsGlobal->esp->tick())
+		cheatsGlobal->addressesAreValid = false;
+
+	if (!cheatsGlobal->tracers->tick())
+		cheatsGlobal->addressesAreValid = false;
+
+	if (screenManagerGlobal->imGUIIsInitialized)
+		screenManagerGlobal->DrawImGUI();
 
 	oFunction(device);
 }

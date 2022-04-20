@@ -24,11 +24,11 @@ void ScreenManager::Line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, flo
 
 void ScreenManager::Text(uint32_t x, uint32_t y, uint32_t w, uint32_t h, std::string text, D3DCOLOR color)
 {
+	if (!espNameFont)
+		return;
 	std::wstring wtext(text.begin(), text.end());
-	LPD3DXFONT m_font = NULL;
 	RECT rect = { x, y, x + w, y + h };
-	D3DXCreateFont(ScreenManager::d3dDevice, 17, 0, FW_BOLD, 0, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Arial"), &m_font);
-	m_font->DrawText(NULL, wtext.c_str(), -1, &rect, DT_CENTER, color);
+	espNameFont->DrawText(NULL, wtext.c_str(), -1, &rect, DT_CENTER, color);
 }
 
 void ScreenManager::DrawImGUI()
@@ -73,8 +73,8 @@ void ScreenManager::DrawImGUI()
 		case SETTINGSRADAR:
 			cheatsGlobal->radar->drawSettings();
 			break;
-		case SETTINGSGUI:
-			theme->GUICustomizer();
+		case SETTINGSTRACERS:
+			cheatsGlobal->tracers->drawSettings();
 		}
 
 		ImGui::Dummy(ImVec2(0.0f, 20.0f));
@@ -93,7 +93,7 @@ void ScreenManager::DrawImGUI()
     }
 }
 
-#define MENUENTRYENABLE(x, y); ImGui::Checkbox(x->name.c_str(), &x->enable); ImGui::SameLine(200); if (ImGui::Button(std::string(x->name+" Settings").c_str())) GUIState = y;
+#define MENUENTRYENABLE(x, y); ImGui::Checkbox(x->name.c_str(), &x->enable); ImGui::SameLine(200); if (ImGui::Button(std::string("Settings##"+x->name).c_str())) GUIState = y;
 #define MENUENTRYNOENABLE(x, y); ImGui::Dummy(ImVec2(100.0f, 1.0f)); ImGui::Text(x->name.c_str()); ImGui::SameLine(200); if (ImGui::Button(std::string(x->name+" Settings").c_str())) GUIState = y;
 
 void ScreenManager::MainMenu() 
@@ -118,10 +118,8 @@ void ScreenManager::MainMenu()
 	MENUENTRYNOENABLE(cheatsGlobal->aimbot, SETTINGSAIMBOT);
 	MENUENTRYENABLE(cheatsGlobal->bhop, SETTINGSBHOP);
 	MENUENTRYENABLE(cheatsGlobal->esp, SETTINGSESP);
+	MENUENTRYENABLE(cheatsGlobal->tracers, SETTINGSTRACERS);
 	MENUENTRYENABLE(cheatsGlobal->radar, SETTINGSRADAR);
 	ImGui::Unindent();
-	ImGui::Dummy(ImVec2(0.0f, 20.0f));
-	if (ImGui::Button("Customize GUI"))
-		GUIState = SETTINGSGUI;
 }
 #pragma warning(default: 4838)

@@ -8,9 +8,9 @@ public:
 
 	bool initialize();
 	TestingHook(uintptr_t moduleBaseIn);
-	typedef void(__cdecl* tTargetPtr)(uint32_t param1, uint32_t param2, uint32_t param3, char param4, char param5);
+	typedef void(__fastcall* tTargetPtr)(void* thisPtr, void* unused, int a2, int a3, int a4, void* a5);
 	static tTargetPtr oFunction;
 
-	static void __cdecl hookFunction(uint32_t param1, uint32_t param2, uint32_t param3, char param4, char param5);
+	static void __cdecl hookFunction(void* thisPtr, void* unused, int a2, int a3, int a4, void* a5);
 };
 

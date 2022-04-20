@@ -21,10 +21,10 @@ public:
 	SetYawOffsetHook* setYawOffsetHook;
 	SetClientViewAnglesHook* setClientViewAnglesHook;
 	TestingHook* testingHook;
-	HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, ServerPlayer* serverPlayerIn);
+	HookManager(uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn);
 	void removeAll();
 	void InitalizeHooks();
-	uintptr_t CSGOExe, ServerDll, ClientDll, EngineDll;
+	uintptr_t ServerDll, ClientDll, EngineDll;
 	ServerPlayer* serverPlayer;
 
 };

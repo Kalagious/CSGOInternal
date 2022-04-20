@@ -1,13 +1,12 @@
 #include "hookmanager.h"
 
 
-HookManager::HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn, ServerPlayer* serverPlayerIn)
+HookManager::HookManager(uintptr_t ServerDllIn, uintptr_t ClientDllIn, uintptr_t EngineDllIn)
 {
-	CSGOExe = CSGOExeIn;
 	ServerDll = ServerDllIn;
 	ClientDll = ClientDllIn;
 	EngineDll = EngineDllIn;
-	serverPlayer = serverPlayerIn;
+	serverPlayer = NULL;
 	setLocalVelHook = new SetLocalVelHook(ServerDll);
 	setPositionHook = new SetPositionHook(ServerDll);
 	setYawOffsetHook = new SetYawOffsetHook(ServerDll);
@@ -19,10 +18,15 @@ HookManager::HookManager(uintptr_t CSGOExeIn, uintptr_t ServerDllIn, uintptr_t C
 void HookManager::InitalizeHooks()
 {
 	printf(" [*] Initializing Game Hooks:\n");
-	setClientViewAnglesHook->initialize();
-	setLocalVelHook->initialize();
-	setPositionHook->initialize();
-	setYawOffsetHook->initialize();
+	if (!setClientViewAnglesHook->enabled)
+		setClientViewAnglesHook->initialize();
+	if (!setLocalVelHook->enabled)
+		setLocalVelHook->initialize();
+	if (!setPositionHook->enabled)
+		setPositionHook->initialize();
+	if (!setYawOffsetHook->enabled)
+		setYawOffsetHook->initialize();
+	printf(" [*] Hooks Initialized!\n\n");
 }
 
 

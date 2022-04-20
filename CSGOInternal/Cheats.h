@@ -1,10 +1,10 @@
 #pragma once
 #include "windows.h"
-#include "HookManager.h"
+#include "hookmanager.h"
+#include "screenmanager.h"
+#include "interfacemanager.h"
 #include "allmodules.h"
 #include "gamestate.h"
-#include "entlist.h"
-#include "screenmanager.h"
 
 
 class Cheats {
@@ -14,15 +14,19 @@ public:
 	void keybinds();
 	void cheatStatus();
 	void cleanup();
-	void initializeHooks();
 	void recalculateAddresses();
 
 	bool serverCheatsEnabled;
 	bool uninject;
 	bool firstTick;
 	bool addressesAreValid;
+	bool loadClientEntityList();
+	bool IsValidEnt(ClientPlayer* player);
+	bool IsValidAndAliveEnt(ClientPlayer* player);
 	HookManager* hookManager;
 	ScreenManager* screenManager;
+	InterfaceManager* interfaceManger;
+
 	uintptr_t clientEntityListAddress;
 	std::vector<ServerPlayer*> serverEntList;
 	std::vector<ClientPlayer*> clientEntList;
@@ -32,8 +36,7 @@ public:
 	ServerWeapon* heldWeapon;
 	ClientState* clientState;
 	GameState* gameState;
-	EntList* entList;
-	uintptr_t csgoExe, serverDll, clientDll, engineDll, inputSystemDll;
+	uintptr_t serverDll, clientDll, engineDll, inputSystemDll;
 
 	std::vector<Module*> modules;
 	InfiniteHealth* infiniteHealth;
@@ -45,4 +48,5 @@ public:
 	Radar* radar;
 	BHop* bhop;
 	ESP* esp;
+	Tracers* tracers;
 };

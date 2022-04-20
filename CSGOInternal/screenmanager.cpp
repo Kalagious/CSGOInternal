@@ -8,16 +8,17 @@ LPDIRECT3DDEVICE9 ScreenManager::d3dDevice;
 ScreenManager::OrigWndProcT ScreenManager::origWndProc;
 ScreenManager* screenManagerGlobal;
 
-
-ScreenManager::ScreenManager()
+ScreenManager::ScreenManager(uintptr_t clientDll)
 {
     endSceneHook = NULL;
     ScreenManager::gameWindowHandle = NULL;
     ScreenManager::origWndProc = NULL;
     gameDimensions = { 0, 0, 0, 0, 0, 0 };
     imGUIIsInitialized = false;
-    GUIIsVisable = true;
-    theme = new ImGuiTheme();
+    GUIIsVisable = false;
+    viewMatrix = new Matrix4x4();
+    playerCamera = (Camera*)(clientDll + PlayerCameraOffset);
+    initialized = false;
 }
 
 
@@ -89,6 +90,34 @@ bool ScreenManager::GetD3D9Device(void** table, size_t tableSize)
     return true;
 }
 
+Vector3 ScreenManager::WorldToScreen(float x, float y, float z, Vector2 screen)
+{
+    Vector3 tmp(x, y, z);
+    return WorldToScreen(tmp, screen);
+}
+
+
+
+Vector3 ScreenManager::WorldToScreen(Vector3 position, Vector2 screen)
+{
+    Vector4 screenCoords = Vector4();
+    viewMatrix->setData(&playerCamera->m4x4_ViewMatrix.data[0]);
+
+    screenCoords.x = position.x * viewMatrix->data[0] + position.y * viewMatrix->data[1] + position.z * viewMatrix->data[2] + viewMatrix->data[3];
+    screenCoords.y = position.x * viewMatrix->data[4] + position.y * viewMatrix->data[5] + position.z * viewMatrix->data[6] + viewMatrix->data[7];
+    screenCoords.z = position.x * viewMatrix->data[8] + position.y * viewMatrix->data[9] + position.z * viewMatrix->data[10] + viewMatrix->data[11];
+    screenCoords.w = position.x * viewMatrix->data[12] + position.y * viewMatrix->data[13] + position.z * viewMatrix->data[14] + viewMatrix->data[15];
+
+    screenCoords.x /= screenCoords.w;
+    screenCoords.y /= screenCoords.w;
+    screenCoords.z /= screenCoords.w;
+
+    Vector3 screenPos((screen.x / 2 * screenCoords.x) + (screenCoords.x + screen.x / 2) , -(screen.y / 2 * screenCoords.y) + (screenCoords.y + screen.y / 2) , screenCoords.w);
+    if (screenCoords.w < 0.1)
+        screenPos.z = -1;
+
+    return screenPos;
+}
 
 bool ScreenManager::Initialize()
 {
@@ -99,8 +128,10 @@ bool ScreenManager::Initialize()
             printf(" [*] D3D Vtable Loaded\n");
             if (!d3d9DeviceVTable[42])
                 return false;
+            espNameFont = NULL;
             endSceneHook = new EndSceneHook((uintptr_t)d3d9DeviceVTable[42]);
             endSceneHook->initialize();
+            initialized = true;
             return true;
         }
     }
@@ -109,7 +140,6 @@ bool ScreenManager::Initialize()
 
 void ScreenManager::Cleanup()
 {
-    theme->SaveTheme();
     endSceneHook->remove();
     SetWindowLongPtr(ScreenManager::gameWindowHandle, GWLP_WNDPROC, (LONG_PTR)ScreenManager::origWndProc);
 }
@@ -143,7 +173,8 @@ bool ScreenManager::InitializeImGUI()
     ImGuiIO& io = ImGui::GetIO();
     io.FontDefault = io.Fonts->AddFontFromFileTTF("C:\\Users\\Jordan\\source\\repos\\CSGOInternal\\CSGOInternal\\ImGUI\\Fonts\\Exo2-Medium.ttf", 24.0f);
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    theme->UpdateTheme();
+    ImGui::StyleColorsDark();
+    ImGui::StyleColorsCheatMenu();
     ImGui_ImplWin32_Init(ScreenManager::gameWindowHandle);
     ImGui_ImplDX9_Init(ScreenManager::d3dDevice);
     imGUIIsInitialized = true;
