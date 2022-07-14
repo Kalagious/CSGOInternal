@@ -16,3 +16,7 @@ Concepts:<br />
   Using reversed classes<br />
   Locating and traversing the entity list<br />
   DLL Injection<br />
+
+
+Guided Hacking is a great resource where I learned this stuff from. 
+https://guidedhacking.com/
