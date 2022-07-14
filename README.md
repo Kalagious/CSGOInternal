@@ -5,7 +5,7 @@ I used a really basic DLL injection technique from GuidedHacking, it will be det
 This project was a way for me to test of number of concepts that I learned about. If you are curious about some of these, then this maybe a cool resource. Dont expect some master hacking skills, this was my second game project.
 
 Concepts:
-  Trampoline Hooking<br\>
+  Trampoline Hooking<br />
   Hooking D3D9
   Simple Aim Bot
   ESP
